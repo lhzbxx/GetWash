@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title>洗衣中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="js/cookie.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/goods.css">
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+	<img src="img/logo.png">
+	<div class="header">
+		<a href="" id="lishi">历史订单</a>
+		<a href="" id="lanzi">洗衣篮<sup id="shuliang">0</sup></a>
+	</div>
+	<div class="list" style="display:none">
+		<div class="goods">
+			<img src="img/西服.jpg">
+			<p>西服 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/羊毛衫.jpg">
+			<p>羊毛衫 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/床单.jpg">
+			<p>床单 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/风衣.jpg">
+			<p>风衣 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/羽绒服.jpg">
+			<p>羽绒服 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/桌布.jpg">
+			<p>桌布 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/西服.jpg">
+			<p>西服 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/羊毛衫.jpg">
+			<p>羊毛衫 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/床单.jpg">
+			<p>床单 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/风衣.jpg">
+			<p>风衣 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/羽绒服.jpg">
+			<p>羽绒服 ￥15</p>
+		</div>
+		<div class="goods">
+			<img src="img/桌布.jpg">
+			<p>桌布 ￥15</p>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".list").fadeIn();
+			$("a").mouseenter (
+				function () {
+					$(this).css({backgroundColor:"#FFFFFF","color":"#009bf5"});
+				}
+			);
+			$("a").mouseleave (
+				function () {
+					$(this).css({backgroundColor:"#009bf5",color:"#FFFFFF"});
+				}
+			);
+			$(".goods").click (
+				function () {
+					var copy = $(this).find("img").clone();
+					copy.css({position:'absolute', left:$(this).offset().left,top:$(this).offset().top, width: '150px', height: '150px'})
+					$("body").append(copy);
+					copy.animate({left:$('#lanzi').offset().left+35, top:$('#lanzi').offset().top+10, height:'10', width:'10', opacity:'0.3'}, 1000, function() { copy.remove(); if(!$('#lanzi').is(":animated")){$('#lanzi').animate({top:"-=8"},150).animate({top:"+=8"},120).animate({top:"-=6"},100).animate({top:"+=6"},80).animate({top:"-=3"},60).animate({top:"+=3"},30);} $('#shuliang').text((parseInt($('#shuliang').text())+1).toString());
+					});
+					$.cookie('shuliang', parseInt($('#shuliang').text()).toString(), { expires: 7 });
+				}
+			);
+		});
+	</script>
+</html>

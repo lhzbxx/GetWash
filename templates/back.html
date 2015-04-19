@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset='utf-8'/>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.3.min.js') }}"></script>
+</head>
+
+<body>
+	
+	<table>
+	<th>
+		<td>订单详细</td>
+		<td>联系方式</td>
+		<td>下单时间</td>
+		<td>状态</td>
+		<td>操作</td>
+	</th>
+	{% for order in orders %}
+	<tr>
+	<td>
+	{{ order.list }}
+	</td>
+	<td>
+	{{ order.contact }}
+	</td>
+	<td>
+	{{ order.time }}
+	</td>
+	<td>
+	{% if order.state == 0 %}
+	<button class="reBtn" onclick="updateOrder({{ order.time }},1)">Receive<button>
+	{% else %}
+		{% if order.state == 1 %}
+		<button onclick="updateOrder({{ order.time }},2)">Send</button>
+		{% endif %}
+	{% endif %}
+	</td>
+	</tr>
+	
+	{% endfor %}
+	</table>
+</body>
+<script>
+	function updateOrder(time, state) {
+		$.post("{{ url_for('updateOrder') }}", {time: time, state: state}, function() {window.location.href = '';});
+	}
+</script>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<!-- <title>易洁 - 云干洗服务</title> -->
+	<title>触手可洗-校园云干洗</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.3.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/cookie.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/goods.css') }}">
+</head>
+<body unselectable="on" onselectstart="return false;">
+	<img src="{{ url_for('static', filename='img/logo.png') }}">
+	<div id="list">
+		<div class="header">
+			<a id="dizhi">地址：</a>
+			<a id="lishi">历史订单</a>
+			<a id="lanzi">洗衣篮<sup id="shuliang">0</sup></a>
+		</div>
+		<iframe id="loading" src="{{ url_for('static', filename='img/loading.gif') }}"></iframe>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+			<span class="mingcheng">西服</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+			<span class="mingcheng">羊毛衫</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/床单.jpg') }}">
+			<span class="mingcheng">床单</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+			<span class="mingcheng">风衣</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+			<span class="mingcheng">羽绒服</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/桌布.jpg') }}">
+			<span class="mingcheng">桌布</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+			<span class="mingcheng">西服</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+			<span class="mingcheng">羊毛衫</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/床单.jpg') }}">
+			<span class="mingcheng">床单</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+			<span class="mingcheng">风衣</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+			<span class="mingcheng">羽绒服</span><span class="danjia">￥15</span>
+		</div>
+		<div class="goods">
+			<img src="{{ url_for('static', filename='img/桌布.jpg') }}">
+			<span class="mingcheng">桌布</span><span class="danjia">￥15</span>
+		</div>
+	</div>
+	<div id="xiyilan">
+		<div class="header">
+			<a id="zongjia">总价：￥<span id="totalPrice">0</span></a>
+			<a id="fanhui1">返回</a>
+			<a id="jiesuan">结算</a>
+		</div>
+		<span class="tishi"></span>
+		<table id="lanziTable" border="0">
+			<tr><td class="tupian"><img src=""></td><td class="mingcheng"><span></span></td><td class="danjia"><span>￥</span></td><td class="jian header"><a>-</a></td><td class="shumu"></td><td class="jia header"><a>+</a></td><td class="jiage">￥</td><td class="shanchu header"><a>&times;</a></td></tr>
+		</table>
+	</div>
+	<div id="jiesuanDiv">
+		<div class="header">
+			<a id="fanhui2">返回</a>
+			<a id="confirm">确认</a>
+		</div>
+		<form id="jiesuanList">
+			<input id="quyu" type="text" placeholder="详细地址" required>
+			<input id="lianxi" type="text" placeholder="联系方式" required>
+			<div id="shijian">
+				<ul id="riqilist" class="droplist">
+					<li id="riqidrop" class="drop">日期<b class="triangle"></b></li>
+					<div class="container"></div>
+				</ul>
+				<ul id="timelist" class="droplist">
+					<li id="timedrop" class="drop">时间<b class="triangle"></b></li>
+					<div class="container"></div>
+				</ul>
+			</div>
+			<div id="zhifu">
+				<span id="dangmian">当面支付</span>
+				<span id="zaixian">在线支付</span>
+			</div>
+			<input id="liuyan" type="text" placeholder="留言">
+		</form>
+		<span class="tishi"></span>
+	</div>
+	<div id="successDiv" style="display:none">
+		<h2>订单提交成功！</h2>
+		<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}" alt="对号">
+		<p>剩余<span id="miaoshu" style="text-decoration:underline">3</span>秒自动跳转</p>
+	</div>
+</body>
+	<script type="text/javascript" charset="utf-8">
+		var riqi = "";
+		var time = "";
+		function texiao() {
+			var i = 0;
+			$(".goods").each(function(){
+				$(this).delay(i).fadeIn();
+				i += 50;
+			});
+		}
+		function update(mingcheng, danjia, shumu, zongjia) {
+			$("#lanziTable").children().remove();
+			for(var i in $("#lanziTable").data()) {
+				var quantity = $("#lanziTable").data(i).quantity;
+				var price = $("#lanziTable").data(i).price;
+				$("#lanziTable").append('<tr><td class="tupian"><img src="/static/mini_img/' + i + '.jpg"></td><td class="mingcheng"><span>' + i + '</span></td><td class="danjia"><span>￥' + price + '</span></td><td class="jian header"><a>-</a></td><td class="shumu">' + quantity + '</td><td class="jia header"><a>+</a></td><td class="jiage">￥' + (price*quantity)  + '</td><td class="shanchu header"><a>&times;</a></td></tr>')
+			}
+		}
+		function shuliang() {
+			var temp = 0;
+			for(var i in $("#lanziTable").data()) {
+				temp += $("#lanziTable").data(i).quantity;
+			}
+			return temp;
+		}
+		function totalPrice() {
+			var temp = 0;
+			for(var i in $("#lanziTable").data()) {
+				temp += $("#lanziTable").data(i).quantity*$("#lanziTable").data(i).price;
+			}
+			return temp;
+		}
+		function updateGood() {
+			$('#shuliang').text(shuliang());
+			$('#totalPrice').text(totalPrice());
+		}
+		$(document).ready(function(){
+			$("#lanziTable").data(JSON.parse($.cookie("cart")));
+			// alert($.cookie("cart"));
+			update();
+
+			var t_img; // 定时器
+			var isLoad = true; // 控制变量
+			// 判断图片加载状况，加载完成后回调
+			isImgLoad(function(){
+			    // 加载完成
+		        $("#loading").remove();
+		    	texiao();
+			});
+			// 判断图片加载的函数
+			function isImgLoad(callback){
+			    // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+			    // 查找所有封面图，迭代处理
+			    $('img').each(function(){
+			        // 找到为0就将isLoad设为false，并退出each
+			        if(this.height === 0){
+			            isLoad = false;
+			            return false;
+			        }
+			    });
+			    // 为true，没有发现为0的。加载完毕
+			    if(isLoad){
+			        clearTimeout(t_img); // 清除定时器
+			        // 回调函数
+			    	callback();
+			    // 为false，因为找到了没有加载完成的图，将调用定时器递归
+			    }else{
+			        isLoad = true;
+			        t_img = setTimeout(function(){
+			            isImgLoad(callback); // 递归扫描
+			        },500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+			    }
+			}
+
+			$("#shuliang").text(shuliang());
+			$("#totalPrice").text(totalPrice());
+			$("#dizhi").text("地址："+$.cookie('dizhi'));
+			$("#confirm").click(
+				function () {
+					if ($("#quyu").val() == "" || $("#lianxi").val() == "" || riqi == "" || time == "") {
+						$('.tishi').text('请填写完整信息！');
+						$('.tishi').slideToggle(200);
+						setTimeout("$('.tishi').slideToggle(200);", 1000);
+					} else {
+						$.post("{{ url_for('toudi') }}", {dizhi: $("#quyu").val(), shouji: $("#lianxi").val(), shijian: riqi + " " + time, content: $.cookie("cart"), note: $("#liuyan").val()}, function () {$("#lanziTable").removeData();$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+							$("#jiesuanDiv").fadeToggle('200', function() {
+								$("#successDiv").fadeToggle('200', function() {	
+									setTimeout("$('#miaoshu').text('2')", 800);
+									setTimeout("$('#miaoshu').text('1')", 1800);
+									setTimeout("$('#miaoshu').text('0')", 2800);
+									setTimeout("window.location.href = ''", 2900);
+								});
+							});
+						});
+					}
+				}
+			);
+			$(".container").delegate('.riqi', 'click', function() {
+				var date = new Date();
+				if ($(this).next()) {
+					for(var i = (date.getHours()+1)>9?(date.getHours()+1):10; i < 21; i++) {
+						$("#timelist").children('.container').append('<li class="time">'+i+':00-'+i+':30'+'</li>');
+						$("#timelist").children('.container').append('<li class="time">'+i+':30-'+(i+1)+':00'+'</li>');
+					}
+				} else {
+					for(var i = 10; i < 21; i++) {
+						$("#timelist").children('.container').append('<li class="time">'+i+':00-'+i+':30'+'</li>');
+						$("#timelist").children('.container').append('<li class="time">'+i+':30-'+(i+1)+':00'+'</li>');
+					}
+				}
+				$("#riqidrop").text($(this).text());
+				$(this).parent().slideToggle();
+				riqi = $(this).text();
+			});
+			$(".container").delegate('.time', 'click', function() {
+				$("#timedrop").text($(this).text());
+				$(this).parent().slideToggle();
+				time = $(this).text()
+			});
+			$(document).click(function(e) {
+				var _con = $('li.drop');
+				if(!_con.is(e.target) && _con.has(e.target).length === 0) {
+					$("li.drop").next().slideUp();
+				}
+			});
+			$("li.drop").click(function() {
+				if ($(this).next().text() != "")
+					$(this).next().stop().slideToggle();
+				else {
+					$('.tishi').text('请先选择日期！');
+					$('.tishi').slideToggle(200);
+					setTimeout("$('.tishi').slideToggle(200);", 1000);
+				}
+			});
+			$("#dangmian").click(function() {
+			});
+			$("#zaixian").click(function() {
+				$('.tishi').text('暂不支持在线支付！');
+				$('.tishi').slideToggle(200);
+				setTimeout("$('.tishi').slideToggle(200);", 1000);
+			});
+			$("#lanziTable").delegate('.shanchu', 'click', function() {
+					$("#lanziTable").removeData($(this).prevAll('.mingcheng').first().text());
+					var temp = parseInt($(this).prevAll('.shumu').first().text());
+					updateGood();
+					$(this).parent().fadeOut(400);
+					setTimeout("$(this).parent().remove()", 400);
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+				}
+			);
+			$("#lanziTable").delegate('.jia', 'click', function() {
+					$("#lanziTable").data($(this).prevAll('.mingcheng').first().text()).quantity += 1;
+					var temp = $(this).prev();
+					updateGood();
+					temp.text((parseInt(temp.text())+1).toString());
+					temp = $(this).nextAll(".jiage").first();
+					temp.text("￥"+(parseInt(temp.text().substring(1))+parseInt($(this).prevAll(".danjia").first().text().substring(1))));
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+				}
+			);
+			$("#lanziTable").delegate('.jian', 'click', function() {
+					var temp = $(this).next();
+					if (temp.text() == '0') {
+						return;
+					}
+					temp.text((parseInt(temp.text())-1).toString());
+					$("#lanziTable").data($(this).prevAll('.mingcheng').first().text()).quantity -= 1;
+					updateGood();
+					if (temp.text() > '0') {
+						$(this).nextAll(".jiage").first().text("￥"+(parseInt($(this).nextAll(".jiage").first().text().substring(1))-parseInt($(this).prevAll(".danjia").first().text().substring(1))));
+					} else {
+						$("#lanziTable").removeData($(this).prevAll('.mingcheng').first().text());
+						$(this).parent().fadeOut(400);
+						setTimeout("$(this).parent().remove()", 400);
+					}
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+				}
+			);
+			$("#lanzi").click(
+				function () {
+					if($('#lanzi').is(":animated"))
+						return;
+					$('#xiyilan').stop();
+					$('#list').fadeToggle(200);
+					$('.goods').hide();
+					setTimeout("$('#xiyilan').fadeToggle(200)", 200);
+				}
+			);
+			$("#dizhi").click(
+				function () {
+					$.post("{{ url_for('deldizhi') }}", function () {window.location.href = '';});
+				}
+			);
+			$("#fanhui1").click(
+				function () {
+					$('.goods').hide();
+					$('#xiyilan').fadeToggle(200);
+					setTimeout("$('#list').fadeToggle(200);texiao();", 200);
+				}
+			);
+			$("#jiesuan").click(
+				function () {
+					if (shuliang() == 0) {
+						$('.tishi').text('请先挑选所需要清洗的衣物！');
+						$('.tishi').slideToggle(200);
+						setTimeout("$('.tishi').slideToggle(200);", 1000);
+					} else {
+						$('#quyu').val("上海交通大学"+$.cookie('dizhi'));
+						$('#xiyilan').fadeToggle(200);
+						var date = new Date();
+						$("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+1)+'-'+date.getDate()+'</li>');
+						if ((date.getDate()+1)>date.MaxDayOfDate) {
+							$("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+2)+'-'+1+'</li>');
+						} else {
+							$("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+1)+'-'+(date.getDate()+1)+'</li>');
+						}
+						setTimeout("$('#jiesuanDiv').fadeToggle(200);", 200);
+					}
+				}
+			);
+			$("#fanhui2").click(
+				function () {
+					$('#jiesuanDiv').fadeToggle(200);
+					setTimeout("$('#xiyilan').fadeToggle(200);", 200);
+				}
+			);
+			$(document).delegate('a', 'mouseenter', function() {
+					if ($(this).attr("id") != "zongjia") {
+						$(this).css({backgroundColor:"#FFFFFF","color":"#009bf5"});
+					};
+				}
+			);
+			$(document).delegate('a', 'mouseleave', function() {
+					if ($(this).attr("id") != "zongjia") {
+						$(this).css({backgroundColor:"#009bf5",color:"#FFFFFF"});
+					};
+				}
+			);
+			$(".goods").click (
+				function () {
+					// 数据处理。
+					var temp = $(this).children('.mingcheng').first().text();
+					if ($("#lanziTable").data(temp)) {
+						$("#lanziTable").data(temp).quantity += 1;
+					} else {
+						$("#lanziTable").data(temp, {quantity:1, price:parseInt($(this).children('.danjia').text().substring(1))});
+					}
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+					update();
+					updateGood();
+					var copy = $(this).find("img").clone();
+					copy.css({position:'absolute', left:$(this).offset().left,top:$(this).offset().top, width: '150px', height: '150px'})
+					$("body").append(copy);
+					copy.animate({left:$('#lanzi').offset().left+35, top:$('#lanzi').offset().top+10, height:'10', width:'10', opacity:'0.3'}, 500, function() {
+						copy.remove();
+						// 动画效果。
+						if(!$('#lanzi').is(":animated")){$('#lanzi').animate({top:"-=8"},100).animate({top:"+=8"},70).animate({top:"-=6"},30).animate({top:"+=6"},20).animate({top:"-=3"},10).animate({top:"+=3"},5);}
+					});
+				}
+			);
+		});
+	</script>
+</html>
