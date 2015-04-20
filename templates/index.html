@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body unselectable="on" onselectstart="return false;">
-	<img src="{{ url_for('static', filename='img/logo.png') }}">
+	<img id="logoImg" src="{{ url_for('static', filename='img/logo_new.png') }}">
 	<h2>选择您的地址</h2>
 	<div class="A" id="p1" style="display: none;">
 		<div class="country">
@@ -118,6 +118,9 @@
 		<br>
 		<span class="tishi"></span>
 	</div>
+	<img id="processImg" src="{{ url_for('static', filename='img/process.png') }}">
+	<br>
+	<span style="text-decoration: underline;cursor:pointer;">关于我们</span>
 </body>
 	<script type="text/javascript">
 		var toggledDrop;

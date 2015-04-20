@@ -10,61 +10,171 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/goods.css') }}">
 </head>
 <body unselectable="on" onselectstart="return false;">
-	<img src="{{ url_for('static', filename='img/logo.png') }}">
+	<img id="logoImg" src="{{ url_for('static', filename='img/logo_new.png') }}">
 	<div id="list">
 		<div class="header">
-			<a id="dizhi">地址：</a>
-			<a id="lishi">历史订单</a>
+			<a id="dizhi">更改地址</a>
+			<a id="lishi">我的订单</a>
 			<a id="lanzi">洗衣篮<sup id="shuliang">0</sup></a>
 		</div>
 		<iframe id="loading" src="{{ url_for('static', filename='img/loading.gif') }}"></iframe>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/西服.jpg') }}">
-			<span class="mingcheng">西服</span><span class="danjia">￥15</span>
+		<div id="goodsPage1">
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+				<span class="mingcheng">西服上衣</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西裤.jpg') }}">
+				<span class="mingcheng">西裤</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">衬衫(单)</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">衬衫(棉)</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+				<span class="mingcheng">羽绒(短)</span><span class="danjia">￥35</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+				<span class="mingcheng">羽绒(长)</span><span class="danjia">￥40</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+				<span class="mingcheng">毛呢大衣</span><span class="danjia">￥35</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">羊绒大衣</span><span class="danjia">￥45</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/床单.jpg') }}">
+				<span class="mingcheng">风衣/夹克</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+				<span class="mingcheng">女士套装</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+				<span class="mingcheng">床单</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/桌布.jpg') }}">
+				<span class="mingcheng">被套</span><span class="danjia">￥20</span>
+			</div>
 		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
-			<span class="mingcheng">羊毛衫</span><span class="danjia">￥15</span>
+		<div id="goodsPage2" style="display:none">
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+				<span class="mingcheng">羽绒(长)</span><span class="danjia">￥40</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+				<span class="mingcheng">毛呢大衣</span><span class="danjia">￥35</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">羊绒大衣</span><span class="danjia">￥45</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/床单.jpg') }}">
+				<span class="mingcheng">风衣/夹克</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+				<span class="mingcheng">西服上衣</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西裤.jpg') }}">
+				<span class="mingcheng">西裤</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">衬衫(单)</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">衬衫(棉)</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+				<span class="mingcheng">羽绒(短)</span><span class="danjia">￥35</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+				<span class="mingcheng">女士套装</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+				<span class="mingcheng">床单</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/桌布.jpg') }}">
+				<span class="mingcheng">被套</span><span class="danjia">￥20</span>
+			</div>
 		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/床单.jpg') }}">
-			<span class="mingcheng">床单</span><span class="danjia">￥15</span>
+		<div id="goodsPage3" style="display:none">
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+				<span class="mingcheng">西服上衣</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西裤.jpg') }}">
+				<span class="mingcheng">西裤</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">衬衫(单)</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">衬衫(棉)</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+				<span class="mingcheng">羽绒(短)</span><span class="danjia">￥35</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/床单.jpg') }}">
+				<span class="mingcheng">风衣/夹克</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+				<span class="mingcheng">女士套装</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
+				<span class="mingcheng">床单</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/桌布.jpg') }}">
+				<span class="mingcheng">被套</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
+				<span class="mingcheng">羽绒(长)</span><span class="danjia">￥40</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/西服.jpg') }}">
+				<span class="mingcheng">毛呢大衣</span><span class="danjia">￥35</span>
+			</div>
+			<div class="goods">
+				<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
+				<span class="mingcheng">羊绒大衣</span><span class="danjia">￥45</span>
+			</div>
 		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
-			<span class="mingcheng">风衣</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
-			<span class="mingcheng">羽绒服</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/桌布.jpg') }}">
-			<span class="mingcheng">桌布</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/西服.jpg') }}">
-			<span class="mingcheng">西服</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/羊毛衫.jpg') }}">
-			<span class="mingcheng">羊毛衫</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/床单.jpg') }}">
-			<span class="mingcheng">床单</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/风衣.jpg') }}">
-			<span class="mingcheng">风衣</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/羽绒服.jpg') }}">
-			<span class="mingcheng">羽绒服</span><span class="danjia">￥15</span>
-		</div>
-		<div class="goods">
-			<img src="{{ url_for('static', filename='img/桌布.jpg') }}">
-			<span class="mingcheng">桌布</span><span class="danjia">￥15</span>
+		<br>
+		<div id="splitPage" style="display:none">
+			<span onclick="formerPage()"><</span>
+			<span id="pageBtn1" onclick="changePage(1)">1</span>
+			<span id="pageBtn2" onclick="changePage(2)">2</span>
+			<span id="pageBtn3" onclick="changePage(3)">3</span>
+			<span onclick="laterPage()">></span>
 		</div>
 	</div>
 	<div id="xiyilan">
@@ -113,19 +223,100 @@
 	<script type="text/javascript" charset="utf-8">
 		var riqi = "";
 		var time = "";
-		function texiao() {
+		$("#splitPage").data("page", 1);
+		function formerPage() {
+			if ($("#splitPage").data("page") == 3 || $("#splitPage").data("page") == 2) {
+				$("#splitPage").data("page", $("#splitPage").data("page")-1);
+				$(".goods").hide();
+				$("#goodsPage1").hide();
+				$("#goodsPage2").hide();
+				$("#goodsPage3").hide();
+				$("#splitPage").hide();
+			}
+			if ($("#splitPage").data("page") == 1) {
+				$("#goodsPage1").show();
+				texiao(1);
+			} else if ($("#splitPage").data("page") == 2) {
+				$("#goodsPage2").show();
+				texiao(2);
+			}
+		}
+		function laterPage() {
+			if ($("#splitPage").data("page") == 1 || $("#splitPage").data("page") == 2) {
+				$("#splitPage").data("page", $("#splitPage").data("page")+1);
+				$(".goods").hide();
+				$("#goodsPage1").hide();
+				$("#goodsPage2").hide();
+				$("#goodsPage3").hide();
+				$("#splitPage").hide();
+			}
+			if ($("#splitPage").data("page") == 2) {
+				$("#goodsPage2").show();
+				texiao(2);
+			} else if ($("#splitPage").data("page") == 3) {
+				$("#goodsPage3").show();
+				texiao(3);
+			}
+		}
+		function changePage(page) {
+			$(".goods").hide();
+			$("#goodsPage1").hide();
+			$("#goodsPage2").hide();
+			$("#goodsPage3").hide();
+			$("#splitPage").hide();
+			if (page == 1) {
+				$("#splitPage").data("page", 1);
+				$("#goodsPage1").show();
+				texiao(1);
+			} else if (page == 2) {
+				$("#splitPage").data("page", 2);
+				$("#goodsPage2").show();
+				texiao(2);
+			} else {
+				$("#splitPage").data("page", 3);
+				$("#goodsPage3").show();
+				texiao(3);
+			}
+		}
+		function texiao(page) {
 			var i = 0;
-			$(".goods").each(function(){
-				$(this).delay(i).fadeIn();
-				i += 50;
-			});
+			if (page == 1) {
+				$("#goodsPage1").show();
+				$("#goodsPage1").children(".goods").each(function(){
+					$(this).delay(i).fadeIn();
+					i += 50;
+				});
+				$("#pageBtn1").css('text-decoration', 'underline');
+				$("#pageBtn2").css('text-decoration', 'none');
+				$("#pageBtn3").css('text-decoration', 'none');
+			} else if (page == 2) {
+				$("#goodsPage2").show();
+				$("#goodsPage2").children(".goods").each(function(){
+					$(this).delay(i).fadeIn();
+					i += 50;
+				});
+				$("#pageBtn1").css('text-decoration', 'none');
+				$("#pageBtn2").css('text-decoration', 'underline');
+				$("#pageBtn3").css('text-decoration', 'none');
+			} else {
+				$("#goodsPage3").show();
+				$("#goodsPage3").children(".goods").each(function(){
+					$(this).delay(i).fadeIn();
+					i += 50;
+				});
+				$("#pageBtn1").css('text-decoration', 'none');
+				$("#pageBtn2").css('text-decoration', 'none');
+				$("#pageBtn3").css('text-decoration', 'underline');
+			}
+			$("#splitPage").delay(700).fadeIn();
 		}
 		function update(mingcheng, danjia, shumu, zongjia) {
 			$("#lanziTable").children().remove();
 			for(var i in $("#lanziTable").data()) {
 				var quantity = $("#lanziTable").data(i).quantity;
 				var price = $("#lanziTable").data(i).price;
-				$("#lanziTable").append('<tr><td class="tupian"><img src="/static/mini_img/' + i + '.jpg"></td><td class="mingcheng"><span>' + i + '</span></td><td class="danjia"><span>￥' + price + '</span></td><td class="jian header"><a>-</a></td><td class="shumu">' + quantity + '</td><td class="jia header"><a>+</a></td><td class="jiage">￥' + (price*quantity)  + '</td><td class="shanchu header"><a>&times;</a></td></tr>')
+				var src = $("#lanziTable").data(i).src;
+				$("#lanziTable").append('<tr><td class="tupian"><img src="' + src + '"></td><td class="mingcheng"><span>' + i + '</span></td><td class="danjia"><span>￥' + price + '</span></td><td class="jian header"><a>-</a></td><td class="shumu">' + quantity + '</td><td class="jia header"><a>+</a></td><td class="jiage">￥' + (price*quantity)  + '</td><td class="shanchu header"><a>&times;</a></td></tr>')
 			}
 		}
 		function shuliang() {
@@ -157,7 +348,7 @@
 			isImgLoad(function(){
 			    // 加载完成
 		        $("#loading").remove();
-		    	texiao();
+		    	texiao($("#splitPage").data("page"));
 			});
 			// 判断图片加载的函数
 			function isImgLoad(callback){
@@ -186,7 +377,7 @@
 
 			$("#shuliang").text(shuliang());
 			$("#totalPrice").text(totalPrice());
-			$("#dizhi").text("地址："+$.cookie('dizhi'));
+			// $("#dizhi").text("地址："+$.cookie('dizhi'));
 			$("#confirm").click(
 				function () {
 					if ($("#quyu").val() == "" || $("#lianxi").val() == "" || riqi == "" || time == "") {
@@ -256,7 +447,6 @@
 					var temp = parseInt($(this).prevAll('.shumu').first().text());
 					updateGood();
 					$(this).parent().fadeOut(400);
-					setTimeout("$(this).parent().remove()", 400);
 					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
 				}
 			);
@@ -282,20 +472,19 @@
 						$(this).nextAll(".jiage").first().text("￥"+(parseInt($(this).nextAll(".jiage").first().text().substring(1))-parseInt($(this).prevAll(".danjia").first().text().substring(1))));
 					} else {
 						$("#lanziTable").removeData($(this).prevAll('.mingcheng').first().text());
-						$(this).parent().fadeOut(400);
-						setTimeout("$(this).parent().remove()", 400);
+						$(this).parent().fadeOut(400, function() { $(this).parent().remove(); });
 					}
 					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
 				}
 			);
 			$("#lanzi").click(
 				function () {
+					$("#splitPage").hide();
 					if($('#lanzi').is(":animated"))
 						return;
 					$('#xiyilan').stop();
-					$('#list').fadeToggle(200);
+					$('#list').fadeToggle(200, function() { $('#xiyilan').fadeToggle(200); });
 					$('.goods').hide();
-					setTimeout("$('#xiyilan').fadeToggle(200)", 200);
 				}
 			);
 			$("#dizhi").click(
@@ -306,8 +495,7 @@
 			$("#fanhui1").click(
 				function () {
 					$('.goods').hide();
-					$('#xiyilan').fadeToggle(200);
-					setTimeout("$('#list').fadeToggle(200);texiao();", 200);
+					$('#xiyilan').fadeToggle(200, function() { $('#list').fadeToggle(200);texiao($('#splitPage').data('page')); });
 				}
 			);
 			$("#jiesuan").click(
@@ -332,8 +520,7 @@
 			);
 			$("#fanhui2").click(
 				function () {
-					$('#jiesuanDiv').fadeToggle(200);
-					setTimeout("$('#xiyilan').fadeToggle(200);", 200);
+					$('#jiesuanDiv').fadeToggle(200, function() { $('#xiyilan').fadeToggle(200); });
 				}
 			);
 			$(document).delegate('a', 'mouseenter', function() {
@@ -355,7 +542,7 @@
 					if ($("#lanziTable").data(temp)) {
 						$("#lanziTable").data(temp).quantity += 1;
 					} else {
-						$("#lanziTable").data(temp, {quantity:1, price:parseInt($(this).children('.danjia').text().substring(1))});
+						$("#lanziTable").data(temp, {quantity:1, price:parseInt($(this).children('.danjia').text().substring(1)), src: $(this).children('img').attr('src')});
 					}
 					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
 					update();

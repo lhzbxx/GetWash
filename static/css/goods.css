@@ -5,15 +5,22 @@ body {
 	padding: 14px 0;
 	-moz-user-select:none;
 	-webkit-user-select:none;
+	font-family: "Microsoft JhengHei","Microsoft YaHei"
 }
 #list {
-	width: 690px;
+	max-width: 570px;
 	margin: 0 auto;
+	width: 95%;
+}
+#logoImg {
+	margin: 15px auto;
+	max-width: 500px;
+	width: 90%;
 }
 .goods {
 	cursor: pointer;
-	height: 180px;
-	width: 150px;
+	height: 150px;
+	width: 120px;
 	border: 3px dashed white;
 	margin: 8px;
 	float: left;
@@ -21,20 +28,38 @@ body {
 	display: none;
 }
 .goods img {
-	height: 150px;
-	width: 150px;
+	height: 120px;
+	width: 120px;
 }
 .goods span {
 	padding: 10px 5px;
 }
+.goods .danjia {
+	position: absolute;
+	bottom: 105px;
+	padding: 11px 5px;
+	right: 5px;
+	background: rgba(0, 155, 245, 0.87);
+	border-radius: 30px;
+}
 .header {
-	height: 25px;
+	width: 100%;
+	max-width: 500px;
+	margin: 5px auto;
 	padding: 25px;
+}
+#splitPage {
+	padding: 5px;
+	font-size: 25px;
+	cursor: pointer;
+}
+#splitPage span {
+	margin: 0 5px;
 }
 #loading {
 	border: none;
-	width: 66px;
-	height: 66px;
+	width: 70px;
+	height: 70px;
 	margin: 50px auto;
 }
 .header sup {
@@ -47,10 +72,11 @@ body {
 .header a {
 	cursor: pointer;
 	text-decoration: none;
-	font-size: 20px;
+	border-radius: 5px;
+	font-size: 18px;
 	color: white;
 	margin: 5px;
-	padding: 8px;
+	padding: 7px 12px;
 	border: 1px solid white;
 	background: rgba(0, 155, 245, 0.87);
 	position: relative;
@@ -76,7 +102,7 @@ body {
 }
 #lanziTable {
 	margin: 0 auto;
-	font-size: 24px;
+	font-size: 19px;
 }
 #lanziTable span {
 	padding-left: 10px;
@@ -87,6 +113,7 @@ body {
 }
 #lanziTable .shumu {
 	font-size: 28px;
+	font-weight: bold;
 	text-decoration: underline;
 }
 #lanziTable img {
