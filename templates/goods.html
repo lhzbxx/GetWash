@@ -170,11 +170,11 @@
 		</div>
 		<br>
 		<div id="splitPage" style="display:none">
-			<span onclick="formerPage()"><</span>
+			<span id="formerBtn" onclick="formerPage()"><</span>
 			<span id="pageBtn1" onclick="changePage(1)">1</span>
 			<span id="pageBtn2" onclick="changePage(2)">2</span>
 			<span id="pageBtn3" onclick="changePage(3)">3</span>
-			<span onclick="laterPage()">></span>
+			<span id="laterBtn" onclick="laterPage()">></span>
 		</div>
 	</div>
 	<div id="xiyilan">
@@ -225,6 +225,8 @@
 		var time = "";
 		$("#splitPage").data("page", 1);
 		function formerPage() {
+			$("#laterBtn").show();
+			$("#formerBtn").show();
 			if ($("#splitPage").data("page") == 3 || $("#splitPage").data("page") == 2) {
 				$("#splitPage").data("page", $("#splitPage").data("page")-1);
 				$(".goods").hide();
@@ -238,10 +240,13 @@
 				texiao(1);
 			} else if ($("#splitPage").data("page") == 2) {
 				$("#goodsPage2").show();
+				$("#formerBtn").hide();
 				texiao(2);
 			}
 		}
 		function laterPage() {
+			$("#laterBtn").show();
+			$("#formerBtn").show();
 			if ($("#splitPage").data("page") == 1 || $("#splitPage").data("page") == 2) {
 				$("#splitPage").data("page", $("#splitPage").data("page")+1);
 				$(".goods").hide();
@@ -255,16 +260,20 @@
 				texiao(2);
 			} else if ($("#splitPage").data("page") == 3) {
 				$("#goodsPage3").show();
+				$("#laterBtn").hide();
 				texiao(3);
 			}
 		}
 		function changePage(page) {
+			$("#formerBtn").show();
+			$("#laterBtn").show();
 			$(".goods").hide();
 			$("#goodsPage1").hide();
 			$("#goodsPage2").hide();
 			$("#goodsPage3").hide();
 			$("#splitPage").hide();
 			if (page == 1) {
+				$("#formerBtn").hide();
 				$("#splitPage").data("page", 1);
 				$("#goodsPage1").show();
 				texiao(1);
@@ -273,6 +282,7 @@
 				$("#goodsPage2").show();
 				texiao(2);
 			} else {
+				$("#laterBtn").hide();
 				$("#splitPage").data("page", 3);
 				$("#goodsPage3").show();
 				texiao(3);
@@ -375,6 +385,7 @@
 			    }
 			}
 
+			$("#formerBtn").hide();
 			$("#shuliang").text(shuliang());
 			$("#totalPrice").text(totalPrice());
 			// $("#dizhi").text("地址："+$.cookie('dizhi'));
@@ -485,6 +496,7 @@
 					$('#xiyilan').stop();
 					$('#list').fadeToggle(200, function() { $('#xiyilan').fadeToggle(200); });
 					$('.goods').hide();
+					$('#splitPage').hide();
 				}
 			);
 			$("#dizhi").click(
@@ -495,6 +507,7 @@
 			$("#fanhui1").click(
 				function () {
 					$('.goods').hide();
+					$('#splitPage').hide();
 					$('#xiyilan').fadeToggle(200, function() { $('#list').fadeToggle(200);texiao($('#splitPage').data('page')); });
 				}
 			);
