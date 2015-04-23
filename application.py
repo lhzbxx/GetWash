@@ -1,5 +1,4 @@
 #-*- coding: utf-8 -*-
-
 import sqlite3
 import os
 import json
@@ -75,6 +74,8 @@ def index():
 @app.route('/back/orders')
 def getBackOrder():
 	orders = query_db('select * from cart')
+	addr = query_db('select addr from user,cart where user.id=cart.id')
+	orders.append(addr)
 	return render_template("back.html", orders = orders)
 		
 		
