@@ -7,6 +7,9 @@ body {
 	-webkit-user-select:none;
 	font-family: "Microsoft JhengHei","Microsoft YaHei"
 }
+.A {
+	height: 200px;
+}
 #logoImg {
 	margin: 15px auto;
 	max-width: 500px;
@@ -125,10 +128,11 @@ input {
 	margin: 10px 0;
 	border: 0;
 }
-#denglu {
-	width: 175px;
+#signin {
 	margin: 0 auto;
+	width: 175px;
 }
+
 .tishi {
 	font-size: 20px;
 	display: none;

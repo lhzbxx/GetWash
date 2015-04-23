@@ -113,28 +113,23 @@
 		<div class="login">
 			<a onclick="confirm()">确认</a>
 			<span>或</span>
-			<a class="quxiaoBtn">取消</a>
-			<span>或</span>
-			<a class="zhuceBtn">注册</a>
+			<a onclick="quxiao()">取消</a>
 		</div>
 		<br>
 		<span class="tishi"></span>
 	</div>
 	<div id="zhuce" style="display: none;">
-		<form class="login" id="signin">
+		<form id="signin">
 			<input id="yonghuming" type="text" placeholder="用户名" required>
 			<input id="mima" type="password" placeholder="密码" required>
-			<input id="yonghuming" type="text" placeholder="手机号" required>
-			<br><br><a>获取验证码</a><br><br>
-			<input id="yonghuming" type="text" placeholder="验证码" required>
 		</form>
 		<br>
 		<div class="login">
 			<a onclick="confirm()">确认</a>
 			<span>或</span>
-			<a class="quxiaoBtn">取消</a>
+			<a onclick="quxiao()">取消</a>
 			<span>或</span>
-			<a class="dengluBtn">登录</a>
+			<a onclick="zhuce()">注册</a>
 		</div>
 		<br>
 		<span class="tishi"></span>
@@ -146,16 +141,24 @@
 	<script type="text/javascript">
 		var toggledDrop;
 		function minhang () {
-			$('#p1').fadeToggle(200, function(){$('#p2').fadeToggle(200)});
+			$('#p1').fadeToggle(200);
+			setTimeout("$('#p2').fadeToggle(200)", 200);
 		}
 		function fanhui1 () {
-			$('#p2').fadeToggle(200, function(){$('#p1').fadeToggle(200)});
+			$('#p2').fadeToggle(200);
+			setTimeout("$('#p1').fadeToggle(200)", 200);
 		}
 		function fanhui2 () {
-			$('#p3').fadeToggle(200, function(){$('#p2').fadeToggle(200)});
+			$('#p3').fadeToggle(200);
+			setTimeout("$('#p2').fadeToggle(200)", 200);
 		}
 		function jiaoda () {
-			$('#p2').fadeToggle(200, function(){$('#p3').fadeToggle(200)});
+			$('#p2').fadeToggle(200);
+			setTimeout("$('#p3').fadeToggle(200)", 200);
+		}
+		function quxiao () {
+			$('#denglu').fadeToggle(200);
+			setTimeout("$('#p1').fadeToggle(200)", 200);
 		}
 		function confirm() {
 			if ($("#yonghuming").val()=="" || $("#mima").val()=="") {
@@ -188,17 +191,9 @@
 			);
 			$(".dengluBtn").click (
 				function () {
-					$(this).parent().parent().fadeToggle(200, function(){$('#denglu').fadeToggle(200);$("#yonghuming").focus});
-				}
-			);
-			$(".zhuceBtn").click (
-				function () {
-					$(this).parent().parent().fadeToggle(200, function(){$('#zhuce').fadeToggle(200);$("#yonghuming").focus});
-				}
-			);
-			$(".quxiaoBtn").click (
-				function () {
-					$(this).parent().parent().fadeToggle(200, function(){$('#p1').fadeToggle(200)});
+					$(this).parent().parent().fadeToggle(200);
+					setTimeout("$('#denglu').fadeToggle(200)", 200);
+					$("#yonghuming").focus();
 				}
 			);
 			$(".loudong").click (
