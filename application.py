@@ -74,7 +74,7 @@ def index():
 @app.route('/back/orders')
 def getBackOrder():
 	orders = query_db('select * from cart')
-	addr = query_db('select addr from user,cart where user.id=cart.id')
+	addr = query_db('select addr from user,cart where user.phone=cart.contact')
 	orders.append(addr)
 	return render_template("back.html", orders = orders)
 		
@@ -86,8 +86,22 @@ def updateOrder():
 	g.db.execute('update cart set state=? where time = ?', [state, time])
 	g.db.commit()
 	return redirect(url_for("getBackOrder"))
-		
-		
+
+@app.route('/ContactSort')
+def ContactSort():
+    orders = query_db('select * from cart natual join user group by contact')
+    return render_template("back.html",orders = orders)
+
+@app.route('/AdSort')
+def AddrSort():
+    orders = query_db('select * from cart natual join user group by addr')
+    return render_template("back.html", orders = orders)
+
+@app.route('/TimeSort')
+def TimeSort():
+    orders = query_db('select * from cart natual join user group by time')
+    return render_template("back.html", orders = orders)
+
 @app.route('/toudi', methods=['GET', 'POST'])
 def toudi():
     dizhi = request.form.get('dizhi')

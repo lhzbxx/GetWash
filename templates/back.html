@@ -10,20 +10,20 @@
 	
 	<table border="1">
     <tr>
-		<th>List detail</th>
-		<th>Comment</th>
-        <th>Phone No.</th>
-		<th>Order Time</th>
-        <th>Address</th>
-        <th>Order State</th>
+		<th>订单详情</th>
+		<th>留言</th>
+        <th>联系方式</th>
+		<th>下单时间</th>
+        <th>地址</th>
+        <th>订单状态</th>
     </tr>
     <tr>
-        <td><button>Sort</button></td>
-        <td><button>Sort</button></td>
-        <td><button>Sort</button></td>
-        <td><button>Sort</button></td>
-        <td><button onclick="AddrSort()">Sort</button></td>
-        <td><button>Sort</button></td>
+        <td></td>
+        <td></td>
+        <td><button onclick="window.location.href='/ContactSort'">排序</button></td>
+        <td><button onclick="window.location.href='/TimeSort'">排序</button></td>
+        <td><button onclick="window.location.href='/AdSort'">排序</button></td>
+        <td></td>
     </tr>
     <tr>
         {% for order in orders %}
@@ -60,7 +60,6 @@
 		$.post("{{ url_for('updateOrder') }}", {time: time, state: state}, function() {window.location.href = '';});
 	}
     function AddrSort(){
-
     }
 </script>
 </html>
