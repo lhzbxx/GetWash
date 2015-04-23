@@ -8,42 +8,58 @@
 
 <body>
 	
-	<table>
-	<th>
-		<td>¶©µ¥ÏêÏ¸</td>
-		<td>ÁªÏµ·½Ê½</td>
-		<td>ÏÂµ¥Ê±¼ä</td>
-		<td>×´Ì¬</td>
-		<td>²Ù×÷</td>
-	</th>
-	{% for order in orders %}
-	<tr>
-	<td>
-	{{ order.list }}
-	</td>
-	<td>
-	{{ order.contact }}
-	</td>
-	<td>
-	{{ order.time }}
-	</td>
-	<td>
-	{% if order.state == 0 %}
-	<button class="reBtn" onclick="updateOrder({{ order.time }},1)">Receive<button>
-	{% else %}
-		{% if order.state == 1 %}
-		<button onclick="updateOrder({{ order.time }},2)">Send</button>
-		{% endif %}
-	{% endif %}
-	</td>
-	</tr>
-	
-	{% endfor %}
+	<table border="1">
+    <tr>
+		<th>è®¢å•è¯¦æƒ…</th>
+		<th>ç•™è¨€</th>
+        <th>è”ç³»æ–¹å¼</th>
+		<th>ä¸‹å•æ—¶é—´</th>
+        <th>åœ°å€</th>
+        <th>è®¢å•çŠ¶æ€</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td><button onclick="window.location.href='/ContactSort'">æ’åº</button></td>
+        <td><button onclick="window.location.href='/TimeSort'">æ’åº</button></td>
+        <td><button onclick="window.location.href='/AdSort'">æ’åº</button></td>
+        <td></td>
+    </tr>
+    <tr>
+        {% for order in orders %}
+        <td>
+	        {{ order.list }}
+	    </td>
+        <td>
+            {{order.comment}}
+        </td>
+        <td>
+	        {{ order.contact }}
+        </td>
+    	<td>
+	        {{ order.time }}
+	    </td>
+        <td>
+            {{ order.addr }}
+        </td>
+        <td>
+	        {% if order.state == 0 %}
+            <button class="reBtn" onclick="updateOrder({{ order.time }},1)">Receive<button>
+    	    {% else %}
+                {% if order.state == 1 %}
+                <button class="reBtn" onclick="updateOrder({{ order.time }},2)">Send</button>
+                {% endif %}
+                {% endif %}
+        </td>
+    	</tr>
+        {% endfor %}
 	</table>
 </body>
 <script>
 	function updateOrder(time, state) {
 		$.post("{{ url_for('updateOrder') }}", {time: time, state: state}, function() {window.location.href = '';});
 	}
+    function AddrSort(){
+    }
 </script>
 </html>
