@@ -1,0 +1,781 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<!-- <title>易洁 - 云干洗服务</title> -->
+	<title>触手可洗-校园云干洗</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.3.min.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/goods.css') }}">
+</head>
+<body unselectable="on" onselectstart="return false;">
+	<img id="logoImg" src="{{ url_for('static', filename='img/logo.png') }}">
+	<div id="list">
+		<div class="header">
+			<a id="lanzi">洗衣篮<sup id="shuliang">0</sup></a><div class="brbr"><br></div>
+<a id="dizhi">更改地址</a>
+		<a id="lishi">查询订单</a>	   
+					</div>
+		<iframe class="loading" src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/loading.gif') }}"></iframe>
+		<div id="goodsPage1">
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/1西服上衣 拷贝.jpg') }}">
+				<span class="mingcheng">西服上衣</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/2西裤 拷贝.jpg') }}">
+				<span class="mingcheng">西裤</span><span class="danjia" style="display:none">￥9</span><span class="danjia_old">￥15</span><span class="danjia_new">&nbsp;￥9&nbsp;</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/3衬衫（单） 拷贝.jpg') }}">
+				<span class="mingcheng">衬衫(单)</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥15</span><span class="danjia_new">￥11</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/4衬衫（棉） 拷贝.jpg') }}">
+				<span class="mingcheng">衬衫(加绒)</span><span class="danjia" style="display:none">￥17</span><span class="danjia_old">￥20</span><span class="danjia_new">￥17</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/5羽绒服（短） 拷贝.jpg') }}">
+				<span class="mingcheng">羽绒服(短)</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥35</span><span class="danjia_new">￥24</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/6羽绒服（长） 拷贝.jpg') }}">
+				<span class="mingcheng">羽绒服(长)</span><span class="danjia" style="display:none">￥34</span><span class="danjia_old">￥40</span><span class="danjia_new">￥34</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/7毛呢大衣 拷贝.jpg') }}">
+				<span class="mingcheng">毛呢大衣</span><span class="danjia" style="display:none">￥29</span><span class="danjia_old">￥35</span><span class="danjia_new">￥29</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/8羊绒大衣 拷贝.jpg') }}">
+				<span class="mingcheng">羊绒大衣</span><span class="danjia" style="display:none">￥38</span><span class="danjia_old">￥45</span><span class="danjia_new">￥38</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/9风衣、夹克 拷贝.jpg') }}">
+				<span class="mingcheng">风衣</span><span class="danjia">￥25</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/10冲锋衣 拷贝.jpg') }}">
+				<span class="mingcheng">冲锋衣</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/11牛仔上衣 拷贝.jpg') }}">
+				<span class="mingcheng">牛仔上衣</span><span class="danjia">￥25</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/12羽绒马甲 拷贝.jpg') }}">
+				<span class="mingcheng">羽绒马甲</span><span class="danjia">￥25</span>
+			</div>
+		</div>
+		<div id="goodsPage2" style="display:none">
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/13毛衣 拷贝.jpg') }}">
+				<span class="mingcheng">毛衣</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/14绒衫 拷贝.jpg') }}">
+				<span class="mingcheng">绒衫</span><span class="danjia">￥25</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/15运动裤 拷贝.jpg') }}">
+				<span class="mingcheng">运动裤</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/16牛仔裤 拷贝.jpg') }}">
+				<span class="mingcheng">牛仔裤</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/17连衣裙.jpg') }}">
+				<span class="mingcheng">连衣裙</span><span class="danjia">￥30</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/18裙子.jpg') }}">
+				<span class="mingcheng">裙子</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/21床单 拷贝.jpg') }}">
+				<span class="mingcheng">床单</span><span class="danjia">￥15</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/22被套 拷贝.jpg') }}">
+				<span class="mingcheng">被套</span><span class="danjia">￥20</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/23枕套 拷贝.jpg') }}">
+				<span class="mingcheng">枕套</span><span class="danjia">￥9</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/24睡衣 拷贝.jpg') }}">
+				<span class="mingcheng">睡衣</span><span class="danjia">￥25</span>
+			</div>
+			<div class="goods">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/25领带 拷贝.jpg') }}">
+				<span class="mingcheng">领带</span><span class="danjia">￥9</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+		</div>
+		<div id="goodsPage3" style="display:none">
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+			<div class="goods goods_more">
+				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+				<span class="mingcheng">敬请期待</span>
+			</div>
+		</div>
+		<br>
+		<div id="splitPage" style="display:none">
+			<span id="formerBtn" onclick="formerPage()"><</span>
+			<span id="pageBtn1" onclick="changePage(1)">1</span>
+			<span id="pageBtn2" onclick="changePage(2)">2</span>
+			<span id="pageBtn3" onclick="changePage(3)">3</span>
+			<span id="laterBtn" onclick="laterPage()">></span>
+		</div>
+	</div>
+	<div id="lishiPage">
+		<!--<iframe class="loading" src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/loading.gif') }}"></iframe>-->
+		<div class="header">
+			<table id="checkPhone">
+				<tr>
+					<td>
+						<input id="shoujihao" type="text" placeholder="手机号" required>
+					</td>
+					<td>
+						
+					</td>
+				</tr>
+<tr><td><a id="huoquBtn" onclick="checkPhone()">获取验证码</a></td></tr>				<tr>
+					<td>
+						<input id="yanzhengma" type="text" placeholder="验证码" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br>
+					</td>
+				</tr>
+			</table>
+			<div id="lishiShow">
+				
+			</div>
+			<a id="checkBtn">查询</a>
+			<a id="fanhui3">返回</a>
+		</div>
+		<span class="tishi"></span>
+	</div>
+	<div id="xiyilan">
+		<span class="tishi"></span>
+		<table id="lanziTable" border="0">
+			<tr><td class="tupian"><img src=""></td><td><span class="mingcheng"></span></td><td class="danjia"><span>￥</span></td><td class="jian header"><a>-</a></td><td class="shumu"></td><td class="jia header"><a>+</a></td><td class="jiage">￥</td><td class="shanchu header"><a>&times;</a></td></tr>
+		</table>
+		<div class="header">
+			<a id="zongjia">总价：￥<span id="totalPrice">0</span></a><br><br><br>
+			<a id="fanhui1">返回</a>
+			<a id="jiesuan">结算</a>
+		</div>
+	</div>
+	<div id="jiesuanDiv">
+		<form id="jiesuanList">
+			<input id="quyu" type="text" placeholder="详细地址" required>
+			<input id="lianxi" type="text" placeholder="联系方式" required>
+			<div id="shijian">
+				<ul id="riqilist" class="droplist">
+					<li id="riqidrop" class="drop">日期<b class="triangle"></b></li>
+					<div class="container"></div>
+				</ul>
+				<ul id="timelist" class="droplist">
+					<li id="timedrop" class="drop">取衣时间<b class="triangle"></b></li>
+					<div class="container"></div>
+				</ul>
+			</div>
+			<div id="zhifu">
+				<span id="dangmian">当面支付</span>
+				<span id="zaixian">在线支付</span>
+			</div>
+			<input id="liuyan" type="text" placeholder="留言">
+		</form>
+		<div class="header">
+			<a id="fanhui2">返回</a>
+			<a id="confirm">确认</a>
+		</div>
+		<span class="tishi"></span>
+	</div>
+	<div id="successDiv" style="display:none">
+		<h2>订单提交成功！</h2>
+		<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/success.png') }}" alt="对号">
+		<p>剩余<span id="miaoshu" style="text-decoration:underline">3</span>秒自动跳转</p>
+	</div>
+</body>
+	<script type="text/javascript" charset="utf-8">
+		var riqi = "";
+		var time = "";
+		var daojishi = 0;
+		$("#splitPage").data("page", 1);
+		function checkPhone () {
+			if (daojishi == 0) {
+				var tel = $("#shoujihao").val(); //获取手机号
+				var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+				//如果手机号码不能通过验证
+				if(telReg == false) {
+					$('.tishi').text('请输入正确手机号码~');
+					$('.tishi').slideToggle(200);
+					setTimeout("$('.tishi').slideToggle(200);", 1000);
+					return;
+				} else {
+					daojishi = 120;
+					$.post("{{ url_for('sendKeyPage') }}", {contact: tel}, function () {
+						alert("验证码已发送");
+						checkPhone_daojishi();
+					});
+				}
+			}
+		}
+		function checkPhone_daojishi() {
+			if(daojishi == 0) {
+				$("#huoquBtn").text("获取");
+			} else {
+				$("#huoquBtn").text(daojishi);
+				daojishi = daojishi -1;
+				setTimeout("checkPhone_daojishi()", 1000)
+			}
+		}
+		function formerPage() {
+			$("#laterBtn").show();
+			$("#formerBtn").show();
+			if ($("#splitPage").data("page") == 3 || $("#splitPage").data("page") == 2) {
+				$("#splitPage").data("page", $("#splitPage").data("page")-1);
+				$(".goods").hide();
+				$("#goodsPage1").hide();
+				$("#goodsPage2").hide();
+				$("#goodsPage3").hide();
+				$("#splitPage").hide();
+			}
+			if ($("#splitPage").data("page") == 1) {
+				$("#goodsPage1").show();
+				$("#formerBtn").hide();
+				texiao(1);
+			} else if ($("#splitPage").data("page") == 2) {
+				$("#goodsPage2").show();
+				texiao(2);
+			}
+		}
+		function laterPage() {
+			$("#laterBtn").show();
+			$("#formerBtn").show();
+			if ($("#splitPage").data("page") == 1 || $("#splitPage").data("page") == 2) {
+				$("#splitPage").data("page", $("#splitPage").data("page")+1);
+				$(".goods").hide();
+				$("#goodsPage1").hide();
+				$("#goodsPage2").hide();
+				$("#goodsPage3").hide();
+				$("#splitPage").hide();
+			}
+			if ($("#splitPage").data("page") == 2) {
+				$("#goodsPage2").show();
+				texiao(2);
+			} else if ($("#splitPage").data("page") == 3) {
+				$("#goodsPage3").show();
+				$("#laterBtn").hide();
+				texiao(3);
+			}
+		}
+		function changePage(page) {
+			$("#formerBtn").show();
+			$("#laterBtn").show();
+			$(".goods").hide();
+			$("#goodsPage1").hide();
+			$("#goodsPage2").hide();
+			$("#goodsPage3").hide();
+			$("#splitPage").hide();
+			if (page == 1) {
+				$("#formerBtn").hide();
+				$("#splitPage").data("page", 1);
+				$("#goodsPage1").show();
+				texiao(1);
+			} else if (page == 2) {
+				$("#splitPage").data("page", 2);
+				$("#goodsPage2").show();
+				texiao(2);
+			} else {
+				$("#laterBtn").hide();
+				$("#splitPage").data("page", 3);
+				$("#goodsPage3").show();
+				texiao(3);
+			}
+		}
+		function texiao(page) {
+			var i = 0;
+			if (page == 1) {
+				$("#goodsPage1").show();
+				$("#goodsPage1").children(".goods").each(function(){
+					$(this).delay(i).fadeIn();
+					i += 50;
+				});
+				$("#pageBtn1").css('text-decoration', 'underline');
+				$("#pageBtn2").css('text-decoration', 'none');
+				$("#pageBtn3").css('text-decoration', 'none');
+			} else if (page == 2) {
+				$("#goodsPage2").show();
+				$("#goodsPage2").children(".goods").each(function(){
+					$(this).delay(i).fadeIn();
+					i += 50;
+				});
+				$("#pageBtn1").css('text-decoration', 'none');
+				$("#pageBtn2").css('text-decoration', 'underline');
+				$("#pageBtn3").css('text-decoration', 'none');
+			} else {
+				$("#goodsPage3").show();
+				$("#goodsPage3").children(".goods").each(function(){
+					$(this).delay(i).fadeIn();
+					i += 50;
+				});
+				$("#pageBtn1").css('text-decoration', 'none');
+				$("#pageBtn2").css('text-decoration', 'none');
+				$("#pageBtn3").css('text-decoration', 'underline');
+			}
+			$("#splitPage").delay(700).fadeIn();
+		}
+		function update(mingcheng, danjia, shumu, zongjia) {
+			$("#lanziTable").children().remove();
+			for(var i in $("#lanziTable").data()) {
+				var quantity = $("#lanziTable").data(i).quantity;
+				var price = $("#lanziTable").data(i).price;
+				var src = $("#lanziTable").data(i).src;
+				$("#lanziTable").append('<tr><td class="tupian"><img src="' + src + '"></td><td class="mingcheng"><span>' + i + '</span><br><span class="danjia_show">￥' + price + '</span></td><td class="danjia"><span>￥' + price + '</span></td><td class="jian header"><a>-</a></td><td class="shumu">' + quantity + '</td><td class="jia header"><a>+</a></td><td class="jiage">￥' + (price*quantity)  + '</td><td class="shanchu header"><a>&times;</a></td></tr>')
+			}
+		}
+		function shuliang () {
+			var temp = 0;
+			for(var i in $("#lanziTable").data()) {
+				temp += $("#lanziTable").data(i).quantity;
+			}
+			return temp;
+		}
+		function totalPrice () {
+			var temp = 0;
+			for(var i in $("#lanziTable").data()) {
+				temp += $("#lanziTable").data(i).quantity*$("#lanziTable").data(i).price;
+			}
+			return temp;
+		}
+		function updateGood () {
+			$('#shuliang').text(shuliang());
+			$('#totalPrice').text(totalPrice());
+		}
+		function queryState (state) {
+			switch(state) {
+			case 0:
+				return "未处理";
+				break;
+			case 1:
+				return "已确认";
+				break;
+			case 2:
+				return "正在清洗";
+				break;
+			case 3:
+				return "待送回";
+				break;
+			case 4:
+				return "已完成";
+				break;
+			default:
+				return "错误"
+			}
+		}
+		function showCart (cart) {
+			var result = "";
+			for (var i in cart) {
+				result += cart[i].name + "：" + cart[i].quantity + "<br>";
+			};
+			return result;
+		}
+		$(document).ready(function(){
+			if(window.screen.width>600){$(".brbr").hide();}$("#lanziTable").data(JSON.parse($.cookie("cart")));
+			// alert($.cookie("cart"));
+			update();
+
+			var t_img; // 定时器
+			var isLoad = true; // 控制变量
+			// 判断图片加载状况，加载完成后回调
+			isImgLoad(function(){
+			    // 加载完成
+		        $(".loading").first().remove();
+		    	texiao($("#splitPage").data("page"));
+			});
+			// 判断图片加载的函数
+			function isImgLoad(callback){
+			    // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+			    // 查找所有封面图，迭代处理
+			    $('img').each(function(){
+			        // 找到为0就将isLoad设为false，并退出each
+			        if(this.height === 0){
+			            isLoad = false;
+			            return false;
+			        }
+			    });
+			    // 为true，没有发现为0的。加载完毕
+			    if(isLoad){
+			        clearTimeout(t_img); // 清除定时器
+			        // 回调函数
+			    	callback();
+			    // 为false，因为找到了没有加载完成的图，将调用定时器递归
+			    }else{
+			        isLoad = true;
+			        t_img = setTimeout(function(){
+			            isImgLoad(callback); // 递归扫描
+			        },500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+			    }
+			}
+			$("#formerBtn").hide();
+			$("#shuliang").text(shuliang());
+			$("#totalPrice").text(totalPrice());
+			// $("#dizhi").text("地址："+$.cookie('dizhi'));
+			$("#confirm").click(
+				function () {
+					if ($.cookie('cart')) {
+						if ($("#quyu").val() == "" || $("#lianxi").val() == "" || riqi == "" || time == "") {
+							$('.tishi').text('请填写完整信息！');
+							$('.tishi').slideToggle(200);
+							setTimeout("$('.tishi').slideToggle(200);", 1000);
+						} else {
+							var tel = $("#lianxi").val(); //获取手机号
+							var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+							//如果手机号码不能通过验证
+							if(telReg == false) {
+								$('.tishi').text('请输入正确手机号码~');
+								$('.tishi').slideToggle(200);
+								setTimeout("$('.tishi').slideToggle(200);", 1000);
+								return;
+							}
+							$.cookie("cart", null);
+							$.post("{{ url_for('toudi') }}", {dizhi: $("#quyu").val(), shouji: $("#lianxi").val(), shijian: riqi + " " + time, content: JSON.stringify($("#lanziTable").data()), note: $("#liuyan").val()}, function () {
+								$("#jiesuanDiv").fadeToggle('200', function() {
+									$("#lanziTable").removeData();
+									$.cookie("contact", $("#lianxi").val(), { expires: 7 });
+									$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+									$("#successDiv").fadeToggle('200', function() {	
+										setTimeout("$('#miaoshu').text('2')", 800);
+										setTimeout("$('#miaoshu').text('1')", 1800);
+										setTimeout("$('#miaoshu').text('0')", 2800);
+										setTimeout("window.location.href = ''", 2900);
+									});
+								});
+							});
+						}
+					} else {
+						return;
+					}
+				}
+			);
+			$("#checkBtn").click(function() {
+				var tel = $("#shoujihao").val(); //获取手机号
+				var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+				//如果手机号码不能通过验证
+				if(telReg == false) {
+					$('.tishi').text('请输入正确手机号码~');
+					$('.tishi').slideToggle(200);
+					setTimeout("$('.tishi').slideToggle(200);", 1000);
+					return;
+				} else {
+					$.post("{{ url_for('checkPhonePage') }}", {contact: tel, key: $("#yanzhengma").val()}, function (data) {
+						if (data.msg == "Wrong") {
+							$('.tishi').text('请输入正确的验证码~');
+							$('.tishi').slideToggle(200);
+							setTimeout("$('.tishi').slideToggle(200);", 1000);
+						} else {
+							$("#checkPhone").hide();
+							$.cookie("contact", tel, { expires: 7 });
+							$("#lishiShow").children().remove();
+							for(i = 0; i < data.cart.length; i++) {
+								$("#lishiShow").append('<table><tr><td>订单内容</td><td>'+showCart(JSON.parse(data.cart[i].list))+'</td></tr><tr><td>取衣时间</td><td>'+data.cart[i].dtime+'</td></tr><tr><td>地址</td><td>'+data.cart[i].deliver+'</td></tr><tr><td>状态</td><td>'+queryState(data.cart[i].state)+'</td></tr><tr><td>留言</td><td>'+data.cart[i].note+'</td></tr></table><br>')
+							}
+						}
+					});
+				}
+			});
+			$("#lishi").click(function() {
+				$("#splitPage").hide();
+				if($('#lanzi').is(":animated"))
+					return;
+				$('#xiyilan').stop();
+				$('#list').fadeToggle(200, function() { 
+					if ($.cookie('contact')) {
+						$("#checkPhone").hide();
+						$("#checkBtn").hide();
+
+						$.post("{{ url_for('checkPhonePage') }}", {contact: $.cookie("contact"), key: "6666"}, function (data) {
+							$("#lishiShow").children().remove();
+							for(i = 0; i < data.cart.length; i++) {
+								$("#lishiShow").append('<table><tr><td>订单内容</td><td>'+showCart(JSON.parse(data.cart[i].list))+'</td></tr><tr><td>取衣时间</td><td>'+data.cart[i].dtime+'</td></tr><tr><td>地址</td><td>'+data.cart[i].deliver+'</td></tr><tr><td>状态</td><td>'+queryState(data.cart[i].state)+'</td></tr><tr><td>留言</td><td>'+data.cart[i].note+'</td></tr></table><br>')
+							}
+						});
+
+					}
+					$('#lishiPage').fadeToggle(200);
+				});
+				$('.goods').hide();
+				$('#splitPage').hide();
+			});
+			$(".container").delegate('.riqi', 'click', function() {
+				var date = new Date();
+				$("#timelist").children('.container').children().remove();
+				$("#timedrop").html('取衣时间<b class="triangle"></b>');
+				time = "";
+// 				if ($(this).next().is(".riqi")) {
+// 					for(var i = (date.getHours()+1)>9?(date.getHours()+1):10; i < 21; i++) {
+// 						$("#timelist").children('.container').append('<li class="time">'+i+':00-'+i+':30'+'</li>');
+// 						$("#timelist").children('.container').append('<li class="time">'+i+':30-'+(i+1)+':00'+'</li>');
+// 					}
+// 				} else {
+// //					for(var i = 10; i < 21; i++) {
+// //						$("#timelist").children('.container').append('<li class="time">'+i+':00-'+i+':30'+'</li>');
+// //						$("#timelist").children('.container').append('<li class="time">'+i+':30-'+(i+1)+':00'+'</li>');
+// //					}
+// 				}
+				if ($(this).prev().text() == "") {
+					if (date.getHours()<10) {
+						$("#timelist").children('.container').append('<li class="time">12:00-12:45</li>');
+					}
+					if ((date.getHours()==11 && date.getMinutes()<15) || date.getHours()<11) {
+						$("#timelist").children('.container').append('<li class="time">12:45-13:30</li>');
+					}
+					if (date.getHours()<16) {
+						$("#timelist").children('.container').append('<li class="time">18:00-18:45</li>');
+					}
+					if ((date.getHours()==17 && date.getMinutes()<15) || date.getHours()<17) {
+						$("#timelist").children('.container').append('<li class="time">18:45-19:30</li>');
+					}
+					if ((date.getHours()==21 && date.getMinutes()<30) || date.getHours()<21) {
+						$("#timelist").children('.container').append('<li class="time">22:00-23:00</li>');
+					} else {
+						$("#timelist").children('.container').append('<li class="notime">无可用取衣时间段</li>');
+					}
+				} else {
+					$("#timelist").children('.container').append('<li class="time">12:00-12:45</li>');
+					$("#timelist").children('.container').append('<li class="time">12:45-13:30</li>');
+					$("#timelist").children('.container').append('<li class="time">18:00-18:45</li>');
+					$("#timelist").children('.container').append('<li class="time">18:45-19:30</li>');
+					$("#timelist").children('.container').append('<li class="time">22:00-23:00</li>');
+				}
+				$("#riqidrop").text($(this).text());
+				$(this).parent().slideToggle(200);
+				riqi = $(this).text();
+				if(riqi.trim() == "今天") {
+					var d = new Date();
+					riqi = d.getMonth()+1+'-'+d.getDate();
+				}
+			});
+			$(".container").delegate('.time', 'click', function() {
+				$("#timedrop").text($(this).text());
+				$(this).parent().slideToggle(200);
+				time = $(this).text()
+			});
+			$(document).click(function(e) {
+				var _con = $('li.drop');
+				if(!_con.is(e.target) && _con.has(e.target).length === 0) {
+					$("li.drop").next().slideUp();
+				}
+			});
+			$("li.drop").click(function() {
+				if ($(this).next().text() != "")
+					$(this).next().stop().slideToggle(200);
+				else {
+					$('.tishi').text('请先选择日期！');
+					$('.tishi').slideToggle(200);
+					setTimeout("$('.tishi').slideToggle(200);", 1000);
+				}
+			});
+			$("#dangmian").click(function() {
+			});
+			$("#zaixian").click(function() {
+				$('.tishi').text('暂不支持在线支付！');
+				$('.tishi').slideToggle(200);
+				setTimeout("$('.tishi').slideToggle(200);", 1000);
+			});
+			$("#lanziTable").delegate('.shanchu', 'click', function() {
+					$("#lanziTable").removeData($(this).prevAll('.mingcheng').first().text());
+					var temp = parseInt($(this).prevAll('.shumu').first().text());
+					updateGood();
+					$(this).parent().fadeOut(400);
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+				}
+			);
+			$("#lanziTable").delegate('.jia', 'click', function() {
+					$("#lanziTable").data($(this).prevAll('.mingcheng').children("span").first().text()).quantity += 1;
+					var temp = $(this).prev();
+					updateGood();
+					temp.text((parseInt(temp.text())+1).toString());
+					temp = $(this).nextAll(".jiage").first();
+					temp.text("￥"+(parseInt(temp.text().substring(1))+parseInt($(this).prevAll(".danjia").first().text().substring(1))));
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+				}
+			);
+			$("#lanziTable").delegate('.jian', 'click', function() {
+					var temp = $(this).next();
+					if (temp.text() == '0') {
+						return;
+					}
+					temp.text((parseInt(temp.text())-1).toString());
+					$("#lanziTable").data($(this).prevAll('.mingcheng').children("span").first().text()).quantity -= 1;
+					updateGood();
+					if (temp.text() > '0') {
+						$(this).nextAll(".jiage").first().text("￥"+(parseInt($(this).nextAll(".jiage").first().text().substring(1))-parseInt($(this).prevAll(".danjia").first().text().substring(1))));
+					} else {
+						$(this).parent().fadeOut(400, function() { $(this).remove(); });
+						$("#lanziTable").removeData($(this).prevAll('.mingcheng').children("span").first().text());
+					}
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+				}
+			);
+			$("#lanzi").click(
+				function () {
+					$("#splitPage").hide();
+					if($('#lanzi').is(":animated"))
+						return;
+					$('#xiyilan').stop();
+					$('#list').fadeToggle(200, function() { $('#xiyilan').fadeToggle(200); });
+					$('.goods').hide();
+					$('#splitPage').hide();
+				}
+			);
+			$("#dizhi").click(
+				function () {
+					// $.post("{{ url_for('deldizhi') }}", function () {window.location.href = '';});
+					$.cookie('dizhi', null);
+					window.location.href = '';
+				}
+			);
+			$("#fanhui1").click(
+				function () {
+					$('.goods').hide();
+					$('#splitPage').hide();
+					$('#xiyilan').fadeToggle(200, function() { $('#list').fadeToggle(200);texiao($('#splitPage').data('page')); });
+				}
+			);
+			$("#fanhui2").click(
+				function () {
+					$('#jiesuanDiv').fadeToggle(200, function() { $('#xiyilan').fadeToggle(200); });
+				}
+			);
+			$("#fanhui3").click(
+				function () {
+					$('.goods').hide();
+					$('#splitPage').hide();
+					$('#lishiPage').fadeToggle(200, function() { $('#list').fadeToggle(200);texiao($('#splitPage').data('page')); });
+				}
+			);
+			$("#jiesuan").click(
+				function () {
+					if (shuliang() == 0) {
+						$('.tishi').text('请先挑选所需要清洗的衣物！');
+						$('.tishi').slideToggle(200);
+						setTimeout("$('.tishi').slideToggle(200);", 1000);
+					} else {
+						$('#quyu').val($.cookie('dizhi'));
+						if ($.cookie("contact")) {
+							$('#lianxi').val($.cookie("contact"));
+						};
+						$('#xiyilan').fadeToggle(200);
+						var date = new Date();
+						$("#riqilist").children('.container').children().remove();
+						$("#riqilist").children('.container').append('<li class="riqi">今天</li>');
+						// $("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+1)+'-'+date.getDate()+'</li>');
+						if ((date.getDate()+1)>date.MaxDayOfDate) {
+							$("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+2)+'-'+1+'</li>');
+						} else {
+							$("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+1)+'-'+(date.getDate()+1)+'</li>');
+						}
+						if ((date.getDate()+2)>date.MaxDayOfDate) {
+							$("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+2)+'-'+1+'</li>');
+						} else {
+							$("#riqilist").children('.container').append('<li class="riqi">'+(date.getMonth()+1)+'-'+(date.getDate()+2)+'</li>');
+						}
+						setTimeout("$('#jiesuanDiv').fadeToggle(200);", 200);
+					}
+				}
+			);
+			$(document).delegate('a', 'mouseenter', function() {
+					if ($(this).attr("id") != "zongjia") {
+						$(this).css({backgroundColor:"#FFFFFF","color":"#009bf5"});
+					};
+				}
+			);
+			$(document).delegate('a', 'mouseleave', function() {
+					if ($(this).attr("id") != "zongjia") {
+						$(this).css({backgroundColor:"#009bf5",color:"#FFFFFF"});
+					};
+				}
+			);
+			$(".goods").click (
+				function () {
+					// 数据处理。
+					if ($(this).hasClass('goods_more')) {
+						return;
+					};
+					var temp = $(this).children('.mingcheng').first().text();
+					if ($("#lanziTable").data(temp)) {
+						$("#lanziTable").data(temp).quantity += 1;
+					} else {
+						$("#lanziTable").data(temp, {quantity:1, price:parseInt($(this).children('.danjia').text().substring(1)), src: $(this).children('img').attr('src'), name: temp});
+					}
+					$.cookie("cart", JSON.stringify($("#lanziTable").data()), { expires: 7 });
+					update();
+					updateGood();
+					var copy = $(this).find("img").clone();
+					copy.css({position:'absolute', left:$(this).offset().left,top:$(this).offset().top, width: '150px', height: '150px'})
+					$("body").append(copy);
+					copy.animate({left:$('#lanzi').offset().left+35, top:$('#lanzi').offset().top+10, height:'10', width:'10', opacity:'0.3'}, 500, function() {
+						copy.remove();
+						// 动画效果。
+						if(!$('#lanzi').is(":animated")){$('#lanzi').animate({top:"-=8"},100).animate({top:"+=8"},70).animate({top:"-=6"},30).animate({top:"+=6"},20).animate({top:"-=3"},10).animate({top:"+=3"},5);}
+					});
+				}
+			);
+		});
+	</script>
+</html>

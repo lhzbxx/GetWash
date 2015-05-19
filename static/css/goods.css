@@ -1,0 +1,267 @@
+body {
+	background: rgba(0, 155, 245, 0.87);
+	text-align: center;
+	color: white;
+	padding: 14px 0;
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	font-family: "Microsoft JhengHei","Microsoft YaHei"
+}
+#list {
+	max-width: 570px;
+	margin: 0 auto;
+	width: 95%;
+}
+#logoImg {
+	margin: 15px auto;
+	max-width: 500px;
+	width: 90%;
+}
+.goods {
+	width: 40%;
+	max-width: 120px;
+	cursor: pointer;
+	height: 150px;
+	border: 3px dashed white;
+	margin: 8px;
+	float: left;
+	position: relative;
+	display: none;
+}
+.goods_more {
+	cursor: none;
+}
+.goods img {
+	height: 120px;
+	width: 120px;
+}
+.goods span {
+	padding: 10px 5px;
+}
+.goods .danjia {
+	position: absolute;
+	bottom: 105px;
+	padding: 11px 5px;
+	right: 5px;
+	background: rgba(0, 155, 245, 0.87);
+	border-radius: 30px;
+}
+.goods .danjia_old {
+	position: absolute;
+	bottom: 105px;
+	padding: 11px 5px;
+	right: 5px;
+	background: rgba(0, 155, 245, 0.87);
+	border-radius: 30px;
+	text-decoration: line-through;
+}
+.goods .danjia_new {
+	position: absolute;
+	bottom: 80px;
+	padding: 11px 5px;
+	right: 5px;
+	background: rgba(242, 75, 75, 0.87);
+	border-radius: 30px;
+}
+.header {
+	margin: 5px auto;
+	padding: 20px;
+}
+#jiesuanDiv .header {
+	margin: 5px auto;
+	padding: 0;
+}
+#splitPage {
+	margin: 0 auto;
+	width: 200px;
+	padding: 5px;
+	font-size: 25px;
+	cursor: pointer;
+}
+#splitPage span {
+	margin: 0 5px;
+}
+.loading {
+	border: none;
+	padding: 0px;
+	width: 70px;
+	height: 70px;
+	margin: 50px auto;
+}
+.header sup {
+	padding: 0 4px;
+	border: 1px solid white;
+	border-radius: 9px;
+	background: white;
+	color: rgba(0, 155, 245, 0.87);
+} .header a {
+	
+cursor: pointer;
+	text-decoration: none;
+	border-radius: 5px;
+	font-size: 18px;
+	color: white;
+	margin: 5px;
+	padding: 7px 12px;
+	border: 1px solid white;
+	background: rgba(0, 155, 245, 0.87);
+	position: relative;
+	-webkit-transition:background 0.5s;
+	-moz-transition:background 0.5s;
+	-o-transition:background 0.5s;
+	transition:background 0.5s
+}
+.header a :hover {
+	background: white;
+	-webkit-transition:background 0.5s;
+	-moz-transition:background 0.5s;
+	-o-transition:background 0.5s;
+	transition:background 0.5s
+}
+#xiyilan {
+	display: none;
+}
+#zongjia {
+	cursor: default;
+	color: rgba(0, 155, 245, 0.87);
+	background: white;
+}
+#lanziTable {
+	margin: 0 auto;
+	font-size: 19px;
+}
+#lanziTable span {
+	padding-left: 10px;
+}
+#lanziTable .header {
+	margin: 5px;
+	padding: 10px;
+}
+#lanziTable .shumu {
+	font-size: 23px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+#lanziTable .shanchu {
+	display: none;
+}
+#lanziTable .jiage {
+	display: none;
+}
+#lanziTable .jian a {
+	margin: 0;
+	padding: 1px 7px;
+}
+#lanziTable .jia a {
+	margin: 0;
+	padding: 1px 5px;
+}
+#lanziTable .danjia {
+	display: none;
+}
+#lanziTable img {
+	width: 70px;
+	height: 70px;
+	border: 1px dashed white;
+}
+#jiesuanDiv {
+	margin: 0 auto;
+	font-size: 24px;
+	display: none;
+	width: 260px;
+}
+#jiesuanList span {
+	cursor: pointer;
+	font-size: 18px;
+	margin: 5px;
+	padding: 5px;
+}
+#zhifu {
+	margin: 10px 0;
+}
+#shijian {
+	margin: 10px 0;
+}
+input {
+	max-width: 200px;
+	padding: 8px;
+	margin: 10px 0;
+	border: 0;
+	font-size: 18px;
+}
+.tishi {
+	font-size: 20px;
+	padding: 10px;
+	display: none;
+	text-decoration: underline;
+	/*overflow: hidden;*/
+}
+#shijian {
+	margin: 0px;
+	font-size: 18px;
+	height: 50px;
+}
+
+b.triangle {
+	display: inline-block;
+	margin-left: 8px;
+	border-style: solid;
+	border-width: 12px 8px 0 8px;
+	border-color: white transparent transparent transparent;
+}
+li {
+	cursor: pointer;
+}
+#riqilist {
+	position: absolute;
+	list-style: none;
+	margin: 5px 0px 0px 10px;
+	padding: 0 0 0 0px;
+	width: 90px;
+	border: 1px solid white;
+	z-index: 1;
+	background: rgba(0, 155, 245, 0.78);
+}
+#timelist {
+	position: absolute;
+	list-style: none;
+	margin: 5px 0px 0px 115px;
+	padding: 0 0 0 0;
+	width: 135px;
+	border: 1px solid white;
+	z-index: 1;
+	background: rgba(0, 155, 245, 0.78);
+}
+ul.droplist .container li:hover {
+	border: 1px dashed white;
+}
+ul.droplist li {
+	border: 1px solid transparent;
+	padding: 3px;
+}
+.container {
+	position: relative;
+	display: none;
+	max-height: 200px;
+	overflow: auto	;
+}
+#dangmian {
+	border: 2px dashed white;
+}
+#lishiPage {
+	margin: 0px auto;
+	width: 80%;
+	max-width: 500px;
+	display:none;
+}
+#checkPhone {
+	margin: 0px auto;
+	width: 95%;
+	max-width: 350px;
+}
+#lishiShow table {
+	border: 1px solid white;
+	width: 300px;
+	text-align: left;
+	margin: 0px auto;
+}
