@@ -103,10 +103,15 @@ def checkPhonePage():
 def backLogin():
     if request.method == 'POST':
         if request.form['usernm'] == "xjcsjtu" and request.form['passwd'] == "getwash.123":
-            session['Admin'] = "Y";
+            session['Admin'] = "1"
             return redirect(url_for('getBackOrder'))
-        else:
-            return redirect(url_for('backLogin'))
+        if request.form['usernm'] == "SJTU" and request.form['passwd'] == "jiaodawang":
+			session['Admin'] = "2"
+			return redirect(url_for('getBackOrder'))
+        if request.form['usernm'] == "ECNU" and request.form['passwd'] == "huashizhou":
+            session['Admin'] = "2"
+            return redirect(url_for('getBackOrder'))
+        return redirect(url_for('backLogin'))
     else:
         return render_template("back_login.html")
 
@@ -114,8 +119,8 @@ def backLogin():
 @app.route('/back/orders')
 def getBackOrder():
     if session.get('Admin'):
-        orders = query_db('select * from cart order by ID desc')
-        return render_template("back.html", orders = orders)
+		orders = query_db('select * from cart order by ID desc')
+		return render_template("back.html", orders = orders, auth=session['Admin'])
     else:
         return redirect(url_for('backLogin'))
         
@@ -158,6 +163,12 @@ def addBeizhu():
     g.db.execute('update cart set comment=? where id=?', [beizhu, pid])
     g.db.commit()
     return jsonify({"msg": "OK"})
+
+@app.route('/back/orders/checkUpdate', methods=['GET', 'POST'])
+def checkUpdate():
+    t = request.form.get('time')
+    orders = query_db('select * from cart where time>?', [int(time.time())-int(t)])
+    return jsonify({"order": orders})
 
 @app.route('/back/orders/remove', methods=['GET', 'POST'])
 def removeOrder():
