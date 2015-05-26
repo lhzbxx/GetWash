@@ -219,6 +219,11 @@ def feedback():
     g.db.commit()
     return jsonify({"msg": "YES"})
 
+@app.route('/roadPlan/getNews', methods=['GET', 'POST'])
+def getNews():
+	a = {"title": "XXXXX", "details": [{"type": "text", "content": "first"}, {"type": "text", "content": "second"}, {"type": "img", "content": "http://7xitj5.com1.z0.glb.clouddn.com/static/img/logo_new.png"}]}
+	return jsonify(a)
+
 @app.route('/refresh')
 def refresh():
     if session.get('logged_in'):
