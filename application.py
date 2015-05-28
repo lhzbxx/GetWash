@@ -104,12 +104,15 @@ def backLogin():
     if request.method == 'POST':
         if request.form['usernm'] == "xjcsjtu" and request.form['passwd'] == "getwash.123":
             session['Admin'] = "1"
+            session['xuexiao'] = "total"
             return redirect(url_for('getBackOrder'))
         if request.form['usernm'] == "SJTU" and request.form['passwd'] == "jiaodawang":
-			session['Admin'] = "2"
-			return redirect(url_for('getBackOrder'))
+            session['Admin'] = "2"
+            session['xuexiao'] = "SJTU"
+            return redirect(url_for('getBackOrder'))
         if request.form['usernm'] == "ECNU" and request.form['passwd'] == "huashizhou":
             session['Admin'] = "2"
+            session['xuexiao'] = "ECNU"
             return redirect(url_for('getBackOrder'))
         return redirect(url_for('backLogin'))
     else:
@@ -119,8 +122,15 @@ def backLogin():
 @app.route('/back/orders')
 def getBackOrder():
     if session.get('Admin'):
-		orders = query_db('select * from cart order by ID desc')
-		return render_template("back.html", orders = orders, auth=session['Admin'])
+        if session['xuexiao'] == "total":
+    		orders = query_db('select * from cart order by ID desc')
+    		return render_template("back.html", orders = orders, auth=session['Admin'])
+        if session['xuexiao'] == "SJTU":
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? order by ID desc', [u'上海交通大学'])
+            return render_template("back.html", orders = orders, auth=session['Admin'])
+        if session['xuexiao'] == "ECNU":
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? order by ID desc', [u'华东师范大学'])
+            return render_template("back.html", orders = orders, auth=session['Admin'])
     else:
         return redirect(url_for('backLogin'))
         
@@ -166,9 +176,17 @@ def addBeizhu():
 
 @app.route('/back/orders/checkUpdate', methods=['GET', 'POST'])
 def checkUpdate():
-    t = request.form.get('time')
-    orders = query_db('select * from cart where time>?', [int(time.time())-int(t)])
-    return jsonify({"order": orders})
+    if session.get('Admin'):
+        t = request.form.get('time')
+        if session['xuexiao'] == "total":
+            orders = query_db('select * from cart where time>? order by ID desc',[int(time.time())-int(t)])
+        if session['xuexiao'] == "SJTU":
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? and time>? order by ID desc', [u'上海交通大学',int(time.time())-int(t)])
+        if session['xuexiao'] == "ECNU":
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? and time>? order by ID desc', [u'华东师范大学',int(time.time())-int(t)])
+        return jsonify({"order": orders})
+    else:
+        return redirect(url_for('backLogin'))
 
 @app.route('/back/orders/remove', methods=['GET', 'POST'])
 def removeOrder():
@@ -232,7 +250,7 @@ def feedback():
 
 @app.route('/roadPlan/getNews', methods=['GET', 'POST'])
 def getNews():
-	a = {"title": "XXXXX", "details": [{"type": "text", "content": "first"}, {"type": "text", "content": "second"}, {"type": "img", "content": "http://7xitj5.com1.z0.glb.clouddn.com/static/img/logo_new.png"}]}
+	a = {"details": [{"title": "我是标题", "content": "first", "img": "http://7xitj5.com1.z0.glb.clouddn.com/static/img/logo_new.png", "source": "新浪微博", "time": "2015.5.27 12:00", "link": "ahahahahah"},{"title": "我是标题", "content": "first", "img": "http://7xitj5.com1.z0.glb.clouddn.com/static/img/logo_new.png", "source": "新浪微博", "time": "2015.5.27 12:00", "link": "ahahahahah"},{"title": "我是标题", "content": "first", "img": "http://7xitj5.com1.z0.glb.clouddn.com/static/img/logo_new.png", "source": "新浪微博", "time": "2015.5.27 12:00", "link": "ahahahahah"}]}
 	return jsonify(a)
 
 @app.route('/refresh')
