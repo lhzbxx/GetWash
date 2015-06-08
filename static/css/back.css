@@ -6,12 +6,10 @@ table, td
     border:1px solid #98bf21;
     padding:3px 6px 2px 6px;
 }
-
 tr:nth-child(odd) td
 {
     background-color:#EAF2D3;
 }
-
 th 
 {
     font-family:"Times New Roman", Arial, Helvetica, sans-serif;

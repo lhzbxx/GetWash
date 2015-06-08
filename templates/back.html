@@ -24,10 +24,11 @@
             border: 1px solid;
         }
     </style>
+    <title>触手可洗 - 后台管理</title>
 </head>
 
 <body>
-    <button onclick="viewHistory()">查看历史记录</button><br><br>
+    <button onclick="viewHistory(this)">查看历史记录</button><br><br>
     {% if auth == '1' %}
     <button onclick="window.location.href='/back/advices'">建议</button>
     {% endif %}
@@ -209,10 +210,11 @@
             $.post("{{ url_for('addBeizhu') }}", {id: $(this).attr("id").substring(7), beizhu: $(this).prev().val()}, function() {alert("添加备注成功！")});
         });
     });
-    function viewHistory() {
+    function viewHistory(v) {
         $("body").prepend('<button onclick="deleteHistory()">删除所有记录</button>')
         if ($.cookie("id"))
             $("body").prepend('<h3>【历史记录】</h3>' + $.cookie("id") + "<br><br>");
+        v.remove();
     }
     function deleteHistory() {
         if(confirm("确定删除所有记录？"))

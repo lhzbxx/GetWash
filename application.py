@@ -55,9 +55,8 @@ def query_db(query, args=(), one=False):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    post = request.get_json()
-    username = post.get('username')
-    password = post.get('password')
+    username = request.form.get("username")
+    password = request.form.get("password")
     user = query_db('select * from user where name = ?', [username], one=True)
     if user is None:
         error = u"用户名不存在。"
@@ -65,7 +64,26 @@ def login():
         if password != user['passwd']:
             error = u"密码不正确。"
         else:
-            return jsonify({"msg": "YES"})
+            return jsonify({"msg": "YES", "contact": user['phone'], "addr": user['addr']})
+    return jsonify({"msg": error})
+
+# 注册。
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    error_r = None
+    if request.method == 'POST':
+        user = query_db('select * from user where name = ?', [request.form['username']], one=True)
+        phone = query_db('select * from user where phone = ?', [request.form['contact']], one=True)
+        if user is not None:
+            error = "REPEAT"
+        elif phone is not None:
+            error = "PHONE"
+        elif session['key'] != request.form['validation']:
+            error = "ERR"
+        else:
+            g.db.execute('insert into user (name, passwd, phone, addr, time) values (?, ?, ?, ?, ?)', [request.form['username'], request.form['password'], request.form['contact'], request.form['addr'], int(time.time())])
+            g.db.commit()
+            error = "YES"
     return jsonify({"msg": error})
 
 @app.route('/')
@@ -83,9 +101,7 @@ def faqPage():
 def sendKeyPage():
     key = randint(10000,99999)
     session['key'] = str(key)
-    print key
     session['number'] = request.form.get("contact")
-    
     return jsonify({"msg": pythonRest.sendKey(key, request.form.get("contact"))})
 
 @app.route('/checkPhone', methods=['GET', 'POST'])
@@ -213,7 +229,10 @@ def removeOrder():
 
 @app.route('/advice', methods=['GET', 'POST'])
 def advice():
-    g.db.execute('insert into advice (content, time) values (?, ?)', [request.form.get('advice'), int(time.time())])
+    if request.form.get('contact'):
+        g.db.execute('insert into advice (content, contact, time) values (?, ?, ?)', [request.form.get('advice'), request.form.get('contact'), int(time.time())])
+    else:
+        g.db.execute('insert into advice (content, time) values (?, ?)', [request.form.get('advice'), int(time.time())])
     g.db.commit()
     return jsonify({"msg": "OK"})
 				
@@ -281,21 +300,6 @@ def refresh():
         return jsonify(js)
     else:
         return redirect(url_for('welcome'));
-
-# 注册。
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    error_r = None
-    if request.method == 'POST':
-        user = query_db('select * from user where username = ?', [request.form['username']], one=True)
-        if user is not None:
-            error_r = u"用户名重复。"
-        else:
-            # 注册新用户。
-            g.db.execute('insert into user (username, password) values (?, ?)', [request.form['username'], request.form['password']])
-            g.db.commit()
-            return redirect(url_for('welcome'));
-    return render_template("welcome.html", error_r = error_r)
 
 # 退出登录。
 @app.route('/logout')

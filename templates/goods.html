@@ -13,16 +13,16 @@
 		<div id="memberBeforeDiv" style="float:left;margin-left:50px;">
 			<img src="{{ url_for('static', filename='img/洗字logo.png') }}">
 			<span>hi,</span>
-			<span id="userNameSpan" style="text-decoration:underline;cursor:pointer;">薛嘉诚<b class="small-triangle"></b></span>
-			<span>!</span>
+			<span id="userNameSpan" style="text-decoration:underline;cursor:pointer;"></span>
+			<span style="display:none;">或 </span><span id="registerSpan" style="text-decoration:underline;cursor:pointer;display:none;">注册</span>
 			<img src="{{ url_for('static', filename='img/定位图标.png') }}">
-			<span>上海交通大学西区X16</span>
+			<span id="userAddrSpan"></span>
 			<span id="dizhi" style="text-decoration:underline;cursor:pointer;">[切换]</span>
 			<div id="memberPersonal">
 				<div class="aaa"><img src="{{ url_for('static', filename='img/优惠券图标.png') }}"><span>我的优惠券</span></div>
 				<div class="aaa"><img src="{{ url_for('static', filename='img/安全设置图标.png') }}"><span>安全设置</span></div>
 				<hr>
-				<div class="aaa"><img src="{{ url_for('static', filename='img/退出图标.png') }}"><span>退出</span></div>
+				<div class="aaa" onclick="$.cookie('user', null);window.location.href='';"><img src="{{ url_for('static', filename='img/退出图标.png') }}"><span>退出</span></div>
 			</div>
 		</div>
 		<div id="memberAfterDiv" style="float:right;margin-right:50px;">
@@ -33,7 +33,10 @@
 	<div id="floatingDiv">
 		<div id="floatingSub1Div_POP">
 			<b id="small-right-triangle1"></b>
-			<img src="{{ url_for('static', filename='img/FAQ.png') }}">
+			<p>Q1: 不确定衣物分类？</p>
+			<p>A1: 请您在留言中注明有不知如何分类的衣物，并选择“当面支付”方式。我们在收取衣物后将由专业分拣人员与您确认衣物种类和价格。</p>
+			<p>Q2: 我的衣服是干洗还是水洗？</p>
+			<p>A2: 选择洗涤方式是根据衣服的面料来选择的。我们的分拣人员都有3年以上的工作经验，确保会采用质量最优的洗涤方式。</p>
 		</div>
 		<div id="floatingSub2Div_POP">
 			<b id="small-right-triangle2"></b>
@@ -41,7 +44,8 @@
 		</div>
 		<div id="floatingSub3Div_POP">
 			<b id="small-right-triangle3"></b>
-			<textarea id="adviceText"></textarea>
+			<input id="adviceContact" style="width:160px;" placeholder="联系方式(选填)">
+			<textarea id="adviceText" placeholder="你的建议或意见......"></textarea>
 			<div class="header">
 				<a id="sendAdviceBtn">提交</a>
 				<a onclick='$("#floatingSub3Div_POP").fadeOut(200);$("#small-right-triangle3").fadeOut(200);'>取消</a>
@@ -52,11 +56,42 @@
 		<div id="floatingSub3Div"><span>反馈</span><br><span>建议</span></div>
 	</div>
 	<img id="logoImg" src="{{ url_for('static', filename='img/logo.png') }}">
-	<div id="list" class="list_jiaoda">
+	<div id="login">
+		<span style="position:relative;left:125px;cursor:pointer;" onclick='$("#login").fadeOut(200);$("#login_background").fadeOut(400);'>&times;</span>
+		<br>
+		<input id="login_username" placeholder="用户名">
+		<input id="login_password" type="password" placeholder="密码">
+		<div class="header">
+			<a id="loginBtn">登录</a>
+			<a onclick='$("#login").fadeOut(200);$("#login_background").fadeOut(400);'>取消</a>
+		</div>
+	</div>
+	<div id="login_background"></div>
+	<div id="register">
+		<span style="position:relative;left:125px;cursor:pointer;" onclick='$("#register").fadeOut(200);$("#register_background").fadeOut(400);'>&times;</span>
+		<br>
+		<input id="register_username" placeholder="用户名">
+		<input id="register_contact" placeholder="手机号">
+		<div class="header">
+			<a id="register_validateBtn">获取验证码</a>
+		</div>
+		<input id="register_validation" placeholder="验证码">
+		<input id="register_password" type="password" placeholder="密码">
+		<div class="header">
+			<a id="registerBtn">注册</a>
+			<a onclick='$("#register").fadeOut(200);$("#register_background").fadeOut(400);'>取消</a>
+		</div>
+	</div>
+	<div id="register_background"></div>
+	<div id="list">
 		<div class="header">
 			<a id="lanzi">洗衣篮<sup id="shuliang">0</sup></a><div class="brbr"><br></div>
 			<a id="lishi">查询订单</a>
 		</div>
+		<div style="text-align:left;margin:0 40px;padding:0 15px;border:1px solid white;">
+			<p>温馨提示：</p><p style="margin-left: 35px;">网页上的价格仅为参考价格。如您的衣物和鞋子有加皮，加厚，羊毛、羊绒、真丝等昂贵面料，或衣物上有难以清洗的污渍等情况，我们将适当增加5~10元清洗费用，请您谅解。</p>
+		</div>
+		<br>
 		<div id="splitPage" style="display:none">
 			<!-- <span id="formerBtn" onclick="formerPage()"><</span> -->
 			<span id="pageBtn1" class="split_active" onclick="changePage(1)">衣物</span>
@@ -66,368 +101,347 @@
 		</div>	
 		<br>
 		<iframe class="loading" src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/loading.gif') }}"></iframe>
-		<div id="goodsPage1">
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/1西服上衣 拷贝.jpg') }}">
-				<span class="mingcheng">西服上衣</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/2西裤 拷贝.jpg') }}">
-				<span class="mingcheng">西裤</span><span class="danjia" style="display:none">￥9</span><span class="danjia_old">￥15</span><span class="danjia_new">&nbsp;￥9&nbsp;</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/3衬衫（单） 拷贝.jpg') }}">
-				<span class="mingcheng">衬衫(单)</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥15</span><span class="danjia_new">￥11</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/4衬衫（棉） 拷贝.jpg') }}">
-				<span class="mingcheng">衬衫(加绒)</span><span class="danjia" style="display:none">￥17</span><span class="danjia_old">￥20</span><span class="danjia_new">￥17</span>
-			</div>
-        	<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/燕尾服24元.jpg') }}">
-				<span class="mingcheng">燕尾服</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/25领带 拷贝.jpg') }}">
-				<span class="mingcheng">领带</span><span class="danjia" style="display:none">￥6</span><span class="danjia_old">￥9</span><span class="danjia_new">￥6</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/7毛呢大衣 拷贝.jpg') }}">
-				<span class="mingcheng">毛呢大衣</span><span class="danjia" style="display:none">￥29</span><span class="danjia_old">￥35</span><span class="danjia_new">￥29</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/8羊绒大衣 拷贝.jpg') }}">
-				<span class="mingcheng">羊绒大衣</span><span class="danjia" style="display:none">￥38</span><span class="danjia_old">￥45</span><span class="danjia_new">￥38</span>
-			</div>
+		<div class="list_jiaoda">
+			<div id="goodsPage1">
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/1西服上衣 拷贝.jpg') }}">
+					<span class="mingcheng">西服上衣</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/2西裤 拷贝.jpg') }}">
+					<span class="mingcheng">西裤</span><span class="danjia" style="display:none">￥9</span><span class="danjia_old">￥15</span><span class="danjia_new">&nbsp;￥9&nbsp;</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/3衬衫（单） 拷贝.jpg') }}">
+					<span class="mingcheng">衬衫(单)</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥15</span><span class="danjia_new">￥11</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/4衬衫（棉） 拷贝.jpg') }}">
+					<span class="mingcheng">衬衫(加绒)</span><span class="danjia" style="display:none">￥17</span><span class="danjia_old">￥20</span><span class="danjia_new">￥17</span>
+				</div>
+	        	<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/燕尾服24元.jpg') }}">
+					<span class="mingcheng">燕尾服</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/25领带 拷贝.jpg') }}">
+					<span class="mingcheng">领带</span><span class="danjia" style="display:none">￥6</span><span class="danjia_old">&nbsp;￥9&nbsp;</span><span class="danjia_new">&nbsp;￥6&nbsp;</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/7毛呢大衣 拷贝.jpg') }}">
+					<span class="mingcheng">毛呢大衣</span><span class="danjia" style="display:none">￥29</span><span class="danjia_old">￥35</span><span class="danjia_new">￥29</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/8羊绒大衣 拷贝.jpg') }}">
+					<span class="mingcheng">羊绒大衣</span><span class="danjia" style="display:none">￥38</span><span class="danjia_old">￥45</span><span class="danjia_new">￥38</span>
+				</div>
 
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羊毛短裙29元.jpg') }}">
-				<span class="mingcheng">羊毛短裙</span><span class="danjia"style="display:none">￥29</span><span class="danjia_old">￥35</span><span class="danjia_new">￥29</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/5羽绒服（短） 拷贝.jpg') }}">
-				<span class="mingcheng">羽绒服(短)</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥35</span><span class="danjia_new">￥24</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/6羽绒服（长） 拷贝.jpg') }}">
-				<span class="mingcheng">羽绒服(长)</span><span class="danjia" style="display:none">￥34</span><span class="danjia_old">￥40</span><span class="danjia_new">￥34</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/12羽绒马甲 拷贝.jpg') }}">
-                <span class="mingcheng">羽绒马甲</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
-			</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羊毛短裙29元.jpg') }}">
+					<span class="mingcheng">羊毛短裙</span><span class="danjia"style="display:none">￥29</span><span class="danjia_old">￥35</span><span class="danjia_new">￥29</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/5羽绒服（短） 拷贝.jpg') }}">
+					<span class="mingcheng">羽绒服(短)</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥35</span><span class="danjia_new">￥24</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/6羽绒服（长） 拷贝.jpg') }}">
+					<span class="mingcheng">羽绒服(长)</span><span class="danjia" style="display:none">￥34</span><span class="danjia_old">￥40</span><span class="danjia_new">￥34</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/12羽绒马甲 拷贝.jpg') }}">
+	                <span class="mingcheng">羽绒马甲</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
+				</div>
 
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/棒球服30元.jpg') }}">
-				<span class="mingcheng">棒球服</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥35</span><span class="danjia_new">￥30</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/13毛衣 拷贝.jpg') }}">
-				<span class="mingcheng">毛衣</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/14绒衫 拷贝.jpg') }}">
-				<span class="mingcheng">绒衫</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羊绒围巾14元.jpg') }}">
-				<span class="mingcheng">羊绒围巾</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
-			</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/棒球服30元.jpg') }}">
+					<span class="mingcheng">棒球服</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥35</span><span class="danjia_new">￥30</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/13毛衣 拷贝.jpg') }}">
+					<span class="mingcheng">毛衣</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/14绒衫 拷贝.jpg') }}">
+					<span class="mingcheng">绒衫</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羊绒围巾14元.jpg') }}">
+					<span class="mingcheng">羊绒围巾</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
+				</div>
 
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/9风衣、夹克 拷贝.jpg') }}">
-                <span class="mingcheng">风衣</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/10冲锋衣 拷贝.jpg') }}">
-				<span class="mingcheng">冲锋衣</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/11牛仔上衣 拷贝.jpg') }}">
-                <span class="mingcheng">牛仔上衣</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/卫衣15元.jpg') }}">
-				<span class="mingcheng">卫衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥21</span><span class="danjia_new">￥15</span>
-			</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/9风衣、夹克 拷贝.jpg') }}">
+	                <span class="mingcheng">风衣</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/10冲锋衣 拷贝.jpg') }}">
+					<span class="mingcheng">冲锋衣</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/11牛仔上衣 拷贝.jpg') }}">
+	                <span class="mingcheng">牛仔上衣</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/卫衣15元.jpg') }}">
+					<span class="mingcheng">卫衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥21</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/真丝衫19元.jpg') }}">
+					<span class="mingcheng">真丝衫</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/T恤8.jpg') }}">
+					<span class="mingcheng">T恤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥16</span><span class="danjia_new">￥11</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/17连衣裙.jpg') }}">
+					<span class="mingcheng">连衣裙</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/18裙子.jpg') }}">
+					<span class="mingcheng">裙子</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/15运动裤 拷贝.jpg') }}">
+					<span class="mingcheng">运动裤</span><span class="danjia" style="display:none">￥9</span><span class="danjia_old">￥15</span><span class="danjia_new">&nbsp;￥9&nbsp;</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/休闲裤15元.jpg') }}">
+					<span class="mingcheng">休闲裤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥15</span><span class="danjia_new">￥11</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/16牛仔裤 拷贝.jpg') }}">
+					<span class="mingcheng">牛仔裤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥15</span><span class="danjia_new">￥11</span>
+				</div>
 
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/真丝衫19元.jpg') }}">
-				<span class="mingcheng">真丝衫</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/24睡衣 拷贝.jpg') }}">
+					<span class="mingcheng">睡衣</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
+				</div>
 			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/T恤8.jpg') }}">
-				<span class="mingcheng">T恤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥16</span><span class="danjia_new">￥11</span>
+			<div id="goodsPage2" style="display:none">
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/运动鞋20元.jpg') }}">
+					<span class="mingcheng">运动鞋</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/篮球鞋20元.jpg') }}">
+					<span class="mingcheng">篮球鞋</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/帆布鞋15元.jpg') }}">
+					<span class="mingcheng">帆布鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/短靴30.jpg') }}">
+					<span class="mingcheng">短靴</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥40</span><span class="danjia_new">￥30</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/短靴30.jpg') }}">
+					<span class="mingcheng">短靴(翻毛)</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/长靴20.jpg') }}">
+					<span class="mingcheng">中筒靴</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/长靴20.jpg') }}">
+					<span class="mingcheng">中筒靴(翻毛)</span><span class="danjia" style="display:none">￥60</span><span class="danjia_old">￥65</span><span class="danjia_new">￥60</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/过膝靴60.jpg') }}">
+					<span class="mingcheng">过膝靴</span><span class="danjia" style="display:none">￥60</span><span class="danjia_old">￥65</span><span class="danjia_new">￥60</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/过膝靴60.jpg') }}">
+					<span class="mingcheng">过膝靴(翻毛)</span><span class="danjia" style="display:none">￥80</span><span class="danjia_old">￥85</span><span class="danjia_new">￥80</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮鞋.jpg') }}">
+					<span class="mingcheng">单皮鞋</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮鞋.jpg') }}">
+					<span class="mingcheng">单皮鞋(翻毛)</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥40</span><span class="danjia_new">￥30</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/凉鞋15元.jpg') }}">
+					<span class="mingcheng">凉鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/拖鞋15元.jpg') }}">
+					<span class="mingcheng">拖鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
 			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/17连衣裙.jpg') }}">
-				<span class="mingcheng">连衣裙</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/18裙子.jpg') }}">
-				<span class="mingcheng">裙子</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/15运动裤 拷贝.jpg') }}">
-				<span class="mingcheng">运动裤</span><span class="danjia" style="display:none">￥9</span><span class="danjia_old">￥15</span><span class="danjia_new">￥9</span>
-			</div>
-
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/休闲裤15元.jpg') }}">
-				<span class="mingcheng">休闲裤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥15</span><span class="danjia_new">￥11</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/16牛仔裤 拷贝.jpg') }}">
-				<span class="mingcheng">牛仔裤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥15</span><span class="danjia_new">￥11</span>
-			</div>
-
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/24睡衣 拷贝.jpg') }}">
-				<span class="mingcheng">睡衣</span><span class="danjia" style="display:none">￥19</span><span class="danjia_old">￥25</span><span class="danjia_new">￥19</span>
-			</div>
-			
-
-		</div>
-		<div id="goodsPage2" style="display:none">
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/运动鞋20元.jpg') }}">
-				<span class="mingcheng">运动鞋</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/篮球鞋20元.jpg') }}">
-				<span class="mingcheng">篮球鞋</span><span class="danjia" style="display:none">￥24</span><span class="danjia_old">￥30</span><span class="danjia_new">￥24</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/帆布鞋15元.jpg') }}">
-				<span class="mingcheng">帆布鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/短靴30.jpg') }}">
-				<span class="mingcheng">短靴</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥40</span><span class="danjia_new">￥30</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/短靴30.jpg') }}">
-				<span class="mingcheng">短靴(翻毛)</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/长靴20.jpg') }}">
-				<span class="mingcheng">中筒靴</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/长靴20.jpg') }}">
-				<span class="mingcheng">中筒靴(翻毛)</span><span class="danjia" style="display:none">￥60</span><span class="danjia_old">￥65</span><span class="danjia_new">￥60</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/过膝靴60.jpg') }}">
-				<span class="mingcheng">过膝靴</span><span class="danjia" style="display:none">￥60</span><span class="danjia_old">￥65</span><span class="danjia_new">￥60</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/过膝靴60.jpg') }}">
-				<span class="mingcheng">过膝靴(翻毛)</span><span class="danjia" style="display:none">￥80</span><span class="danjia_old">￥85</span><span class="danjia_new">￥80</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮鞋.jpg') }}">
-				<span class="mingcheng">单皮鞋</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮鞋.jpg') }}">
-				<span class="mingcheng">单皮鞋(翻毛)</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥40</span><span class="danjia_new">￥30</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/凉鞋15元.jpg') }}">
-				<span class="mingcheng">凉鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/拖鞋15元.jpg') }}">
-				<span class="mingcheng">拖鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-		</div>
-		<div id="goodsPage3" style="display:none">
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/21床单 拷贝.jpg') }}">
-				<span class="mingcheng">(赠)床单</span><span class="danjia" style="display:none">￥0</span><span class="danjia_old">￥15</span><span class="danjia_new">￥0</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/21床单 拷贝.jpg') }}">
-				<span class="mingcheng">床单</span><span class="danjia" style="display:none">￥8</span><span class="danjia_old">￥15</span><span class="danjia_new">￥8</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/22被套 拷贝.jpg') }}">
-				<span class="mingcheng">被套</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/23枕套 拷贝.jpg') }}">
-				<span class="mingcheng">枕套</span><span class="danjia" style="display:none">￥5</span><span class="danjia_old">￥14</span><span class="danjia_new">￥5</span>
-			</div>
-<!-- 			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div> -->
-		</div>
-	</div>
-	<div id="list" class="list_huashida">
-		<div class="header">
-			<a id="lanzi">洗衣篮<sup id="shuliang">0</sup></a><div class="brbr"><br></div>
-			<a id="dizhi">更改地址</a>
-			<a id="lishi">查询订单</a>	   
-		</div>
-		<div id="splitPage" style="display:none">
-			<!-- <span id="formerBtn" onclick="formerPage()"><</span> -->
-			<span id="pageBtn1" onclick="changePage(1)">衣物</span>
-			<span id="pageBtn2" onclick="changePage(2)">鞋</span>
-			<span id="pageBtn3" onclick="changePage(3)">床上用品</span>
-			<!-- <span id="laterBtn" onclick="laterPage()">></span> -->
-		</div>
-		<br>
-		<iframe class="loading" src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/loading.gif') }}"></iframe>
-		<div id="goodsPage1">
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/1西服上衣 拷贝.jpg') }}">
-				<span class="mingcheng">西服上衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/2西裤 拷贝.jpg') }}">
-				<span class="mingcheng">西裤</span><span class="danjia" style="display:none">￥8</span><span class="danjia_old">￥15</span><span class="danjia_new">￥8</span>
-			</div>
-                <div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/3衬衫（单） 拷贝.jpg') }}">
-                <span class="mingcheng">衬衫</span><span class="danjia" style="display:none">￥10</span><span class="danjia_old">￥15</span><span class="danjia_new">￥10</span>
-			</div>
-			
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/5羽绒服（短） 拷贝.jpg') }}">
-                <span class="mingcheng">羽绒服(短)</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/6羽绒服（长） 拷贝.jpg') }}">
-                <span class="mingcheng">羽绒服(长)</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥35</span><span class="danjia_new">￥30</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮衣.jpg') }}">
-				<span class="mingcheng">皮衣</span><span class="danjia" style="display:none">￥60</span><span class="danjia_old">￥65</span><span class="danjia_new">￥60</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/13毛衣 拷贝.jpg') }}">
-				<span class="mingcheng">毛衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/7毛呢大衣 拷贝.jpg') }}">
-				<span class="mingcheng">毛呢大衣</span><span class="danjia" style="display:none">￥25</span><span class="danjia_old">￥30</span><span class="danjia_new">￥25</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/8羊绒大衣 拷贝.jpg') }}">
-				<span class="mingcheng">羊绒大衣</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥35</span><span class="danjia_new">￥30</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/9风衣、夹克 拷贝.jpg') }}">
-                <span class="mingcheng">风衣</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/10冲锋衣 拷贝.jpg') }}">
-				<span class="mingcheng">冲锋衣</span><span class="danjia" style="display:none">￥25</span><span class="danjia_old">￥30</span><span class="danjia_new">￥25</span>
-			</div>
-
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/11牛仔上衣 拷贝.jpg') }}">
-                <span class="mingcheng">牛仔上衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/T恤8.jpg') }}">
-                <span class="mingcheng">T恤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥16</span><span class="danjia_new">￥11</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/裤子12.jpg') }}">
-				<span class="mingcheng">裤子</span><span class="danjia" style="display:none">￥12</span><span class="danjia_old">￥18</span><span class="danjia_new">￥12</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/18裙子.jpg') }}">
-				<span class="mingcheng">裙子</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
+			<div id="goodsPage3" style="display:none">
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/21床单 拷贝.jpg') }}">
+					<span class="mingcheng">(赠)床单</span><span class="danjia" style="display:none">￥0</span><span class="danjia_old">￥15</span><span class="danjia_new">&nbsp;￥0&nbsp;</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/21床单 拷贝.jpg') }}">
+					<span class="mingcheng">床单</span><span class="danjia" style="display:none">￥8</span><span class="danjia_old">￥15</span><span class="danjia_new">&nbsp;￥8&nbsp;</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/22被套 拷贝.jpg') }}">
+					<span class="mingcheng">被套</span><span class="danjia" style="display:none">￥14</span><span class="danjia_old">￥20</span><span class="danjia_new">￥14</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/23枕套 拷贝.jpg') }}">
+					<span class="mingcheng">枕套</span><span class="danjia" style="display:none">￥5</span><span class="danjia_old">￥14</span><span class="danjia_new">&nbsp;￥5&nbsp;</span>
+				</div>
 			</div>
 		</div>
-		<div id="goodsPage2" style="display:none">
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/运动鞋20元.jpg') }}">
-				<span class="mingcheng">运动鞋</span><span class="danjia" style="display:none">￥12</span><span class="danjia_old">￥18</span><span class="danjia_new">￥12</span>
+		<div class="list_huashida">
+			<div id="goodsPage1">
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/1西服上衣 拷贝.jpg') }}">
+					<span class="mingcheng">西服上衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/2西裤 拷贝.jpg') }}">
+					<span class="mingcheng">西裤</span><span class="danjia" style="display:none">￥8</span><span class="danjia_old">￥15</span><span class="danjia_new">￥8</span>
+				</div>
+	                <div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/3衬衫（单） 拷贝.jpg') }}">
+	                <span class="mingcheng">衬衫</span><span class="danjia" style="display:none">￥10</span><span class="danjia_old">￥15</span><span class="danjia_new">￥10</span>
+				</div>
+				
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/5羽绒服（短） 拷贝.jpg') }}">
+	                <span class="mingcheng">羽绒服(短)</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/6羽绒服（长） 拷贝.jpg') }}">
+	                <span class="mingcheng">羽绒服(长)</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥35</span><span class="danjia_new">￥30</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮衣.jpg') }}">
+					<span class="mingcheng">皮衣</span><span class="danjia" style="display:none">￥60</span><span class="danjia_old">￥65</span><span class="danjia_new">￥60</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/13毛衣 拷贝.jpg') }}">
+					<span class="mingcheng">毛衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/7毛呢大衣 拷贝.jpg') }}">
+					<span class="mingcheng">毛呢大衣</span><span class="danjia" style="display:none">￥25</span><span class="danjia_old">￥30</span><span class="danjia_new">￥25</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/8羊绒大衣 拷贝.jpg') }}">
+					<span class="mingcheng">羊绒大衣</span><span class="danjia" style="display:none">￥30</span><span class="danjia_old">￥35</span><span class="danjia_new">￥30</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/9风衣、夹克 拷贝.jpg') }}">
+	                <span class="mingcheng">风衣</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/10冲锋衣 拷贝.jpg') }}">
+					<span class="mingcheng">冲锋衣</span><span class="danjia" style="display:none">￥25</span><span class="danjia_old">￥30</span><span class="danjia_new">￥25</span>
+				</div>
+
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/11牛仔上衣 拷贝.jpg') }}">
+	                <span class="mingcheng">牛仔上衣</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/T恤8.jpg') }}">
+	                <span class="mingcheng">T恤</span><span class="danjia" style="display:none">￥11</span><span class="danjia_old">￥16</span><span class="danjia_new">￥11</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/裤子12.jpg') }}">
+					<span class="mingcheng">裤子</span><span class="danjia" style="display:none">￥12</span><span class="danjia_old">￥18</span><span class="danjia_new">￥12</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/18裙子.jpg') }}">
+					<span class="mingcheng">裙子</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
 			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/篮球鞋20元.jpg') }}">
-				<span class="mingcheng">篮球鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+			<div id="goodsPage2" style="display:none">
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/运动鞋20元.jpg') }}">
+					<span class="mingcheng">运动鞋</span><span class="danjia" style="display:none">￥12</span><span class="danjia_old">￥18</span><span class="danjia_new">￥12</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/篮球鞋20元.jpg') }}">
+					<span class="mingcheng">篮球鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/帆布鞋15元.jpg') }}">
+					<span class="mingcheng">帆布鞋</span><span class="danjia" style="display:none">￥10</span><span class="danjia_old">￥15</span><span class="danjia_new">￥10</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/长靴20.jpg') }}">
+					<span class="mingcheng">长靴</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮鞋.jpg') }}">
+					<span class="mingcheng">皮鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
 			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/帆布鞋15元.jpg') }}">
-				<span class="mingcheng">帆布鞋</span><span class="danjia" style="display:none">￥10</span><span class="danjia_old">￥15</span><span class="danjia_new">￥10</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/长靴20.jpg') }}">
-				<span class="mingcheng">长靴</span><span class="danjia" style="display:none">￥20</span><span class="danjia_old">￥25</span><span class="danjia_new">￥20</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/皮鞋.jpg') }}">
-				<span class="mingcheng">皮鞋</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥20</span><span class="danjia_new">￥15</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-		</div>
-		<div id="goodsPage3" style="display:none">
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/21床单 拷贝.jpg') }}">
-				<span class="mingcheng">床单</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥8</span><span class="danjia_new">￥8</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/22被套 拷贝.jpg') }}">
-				<span class="mingcheng">被套</span><span class="danjia" style="display:none">￥10</span><span class="danjia_old">￥15</span><span class="danjia_new">￥10</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/23枕套 拷贝.jpg') }}">
-				<span class="mingcheng">枕套</span><span class="danjia" style="display:none">￥6</span><span class="danjia_old">￥12</span><span class="danjia_new">￥6</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羊毛毯40.jpg') }}">
-				<span class="mingcheng">羊毛毯</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
-			</div>
-			<div class="goods">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羽绒被40.jpg') }}">
-				<span class="mingcheng">羽绒被</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
-			</div>
-			<div class="goods goods_more">
-				<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
-				<span class="mingcheng">敬请期待</span>
+			<div id="goodsPage3" style="display:none">
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/21床单 拷贝.jpg') }}">
+					<span class="mingcheng">床单</span><span class="danjia" style="display:none">￥15</span><span class="danjia_old">￥8</span><span class="danjia_new">￥8</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/22被套 拷贝.jpg') }}">
+					<span class="mingcheng">被套</span><span class="danjia" style="display:none">￥10</span><span class="danjia_old">￥15</span><span class="danjia_new">￥10</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/23枕套 拷贝.jpg') }}">
+					<span class="mingcheng">枕套</span><span class="danjia" style="display:none">￥6</span><span class="danjia_old">￥12</span><span class="danjia_new">￥6</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羊毛毯40.jpg') }}">
+					<span class="mingcheng">羊毛毯</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
+				</div>
+				<div class="goods">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/羽绒被40.jpg') }}">
+					<span class="mingcheng">羽绒被</span><span class="danjia" style="display:none">￥40</span><span class="danjia_old">￥45</span><span class="danjia_new">￥40</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
+				<div class="goods goods_more">
+					<img src="http://7xitj5.com1.z0.glb.clouddn.com{{ url_for('static', filename='img/more.jpg') }}">
+					<span class="mingcheng">敬请期待</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -545,9 +559,11 @@
 			if(daojishi == 0) {
 				$("#huoquBtn").text("获取");
 				$("#resendValidation").text("重发");
+				$("#register_validateBtn").text("获取验证码");
 			} else {
 				$("#huoquBtn").text(daojishi);
 				$("#resendValidation").text(daojishi);
+				$("#register_validateBtn").text(daojishi);
 				daojishi = daojishi -1;
 				setTimeout("checkPhone_daojishi()", 1000)
 			}
@@ -723,6 +739,18 @@
 			} else {
 				$(".list_huashida").remove();
 			}
+
+			if($.cookie("user")) {
+				$("#userNameSpan").html($.cookie("user")+'!<b class="small-triangle"></b>');
+			} else {
+				$("#userNameSpan").text("登录");
+				$("#registerSpan").show();
+				$("#registerSpan").prev().show();
+			}
+			if($.cookie("dizhi")) {
+				$("#userAddrSpan").text($.cookie("dizhi"));
+			}
+
 			$("#splitPage").data("page", 1);
 
 			update();
@@ -868,14 +896,12 @@
 					if ($.cookie('contact')) {
 						$("#checkPhone").hide();
 						$("#checkBtn").hide();
-
 						$.post("{{ url_for('checkPhonePage') }}", {contact: $.cookie("contact"), key: "6666"}, function (data) {
 							$("#lishiShow").children().remove();
 							for(i = 0; i < data.cart.length; i++) {
 								$("#lishiShow").append('<table><tr><td>订单内容</td><td>'+showCart(JSON.parse(data.cart[i].list))+'</td></tr><tr><td>取衣时间</td><td>'+data.cart[i].dtime+'</td></tr><tr><td>地址</td><td>'+data.cart[i].deliver+'</td></tr><tr><td>状态</td><td>'+queryState(data.cart[i].state)+'</td></tr><tr><td>留言</td><td>'+data.cart[i].note+'</td></tr></table><br>')
 							}
 						});
-
 					}
 					$('#lishiPage').fadeToggle(200);
 				});
@@ -1141,7 +1167,19 @@
 				$(this).fadeOut(200);
 			});
 			$("#userNameSpan").hover(function() {
-				$('#memberPersonal').fadeIn(200)
+				if($.cookie("user")) {
+					$('#memberPersonal').fadeIn(200);
+				}
+			});
+			$("#userNameSpan").click(function() {
+				if($.cookie("user") == null) {
+					$('#login').fadeIn(200);
+					$('#login_background').fadeIn(400);
+				}
+			});
+			$("#registerSpan").click(function() {
+				$('#register').fadeIn(200);
+				$('#register_background').fadeIn(400);
 			});
 			$(".goods").click (
 				function () {
@@ -1171,6 +1209,84 @@
 					});
 				}
 			);
+			$("#sendAdviceBtn").click(function() {
+				if ($("#adviceText").val() != "") {
+					if($("#adviceContact").val()) {
+						$.post("{{ url_for('advice') }}", {advice: $("#adviceText").val(), contact: $("#adviceContact").val()}, function () {;alert("提交成功！\n感谢您的建议！");$("#adviceText").val("");$("#floatingSub3Div_POP").fadeOut('200');});
+					} else if($.cookie('contact')) {
+						$.post("{{ url_for('advice') }}", {advice: $("#adviceText").val(), contact: $.cookie('contact')}, function () {;alert("提交成功！\n感谢您的建议！");$("#adviceText").val("");$("#floatingSub3Div_POP").fadeOut('200');});
+					} else {
+						$.post("{{ url_for('advice') }}", {advice: $("#adviceText").val()}, function () {;alert("提交成功！\n感谢您的建议！");$("#adviceText").val("");$("#floatingSub3Div_POP").fadeOut('200');});
+					}
+				};
+			});
+			$("#loginBtn").click(function() {
+				if ($("#login_username").val() == "") {
+					$("#login_username").focus();
+					return;
+				};
+				if ($("#login_password").val() == "") {
+					$("#login_password").focus();
+					return;
+				}
+				$.post("{{ url_for('login') }}", {username: $("#login_username").val(), password: $("#login_password").val()}, function (data) {
+					if (data.msg != "YES") {
+						alert("用户名或密码错误！");
+					} else {
+						$.cookie('dizhi', data.addr, { expires: 7 });
+						$.cookie('contact', data.contact, { expires: 7 });
+						$.cookie('user', $("#login_username").val(), { expires: 7 });
+						window.location.href='';
+					}
+				});
+			});
+			$("#register_validateBtn").click(function() {
+				var tel = $("#register_contact").val(); //获取手机号
+				var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+				//如果手机号码不能通过验证
+				if(telReg == false) {
+					alert('请输入正确手机号码~');
+					return;
+				} else {
+					$.post("{{ url_for('sendKeyPage') }}", {contact: tel}, function () {
+						alert("验证码已发送");
+						daojishi = 60;
+						checkPhone_daojishi()
+					});
+				}
+			});
+			$("#registerBtn").click(function() {
+				if ($("#register_username").val() == "") {
+					$("#register_username").focus();
+					return;
+				};
+				if ($("#register_contact").val() == "") {
+					$("#register_contact").focus();
+					return;
+				}
+				if ($("#register_validation").val() == "") {
+					$("#register_validation").focus();
+					return;
+				}
+				if ($("#register_password").val() == "") {
+					$("#register_password").focus();
+					return;
+				}
+				$.post("{{ url_for('register') }}", {username: $("#register_username").val(), password: $("#register_password").val(), contact: $("#register_contact").val(), addr: $.cookie('dizhi'), validation: $("#register_validation").val()}, function (data) {
+					if (data.msg == "REPEAT") {
+						alert("用户名重复！");
+					} else if (data.msg == "PHONE") {
+						alert("手机号重复！");
+					} else if (data.msg == "ERR") {
+						alert("验证码错误！");
+					} else {
+						$.cookie('contact', $("#register_contact").val(), { expires: 7 });
+						$.cookie('user', $("#register_username").val(), { expires: 7 });
+						alert("注册成功！");
+						window.location.href='';
+					}
+				});
+			});
 		});
 	</script>
 </html>
