@@ -27,9 +27,17 @@
 </head>
 
 <body>
-    {% if auth == 1 %}
+    <button onclick="viewHistory()">查看历史记录</button><br><br>
+    {% if auth == '1' %}
     <button onclick="window.location.href='/back/advices'">建议</button>
     {% endif %}
+    {% if not all %}
+    <button onclick="window.location.href='/back/orders/all'">查看全部</button>
+    {% endif %}
+    {% if all %}
+    <button onclick="window.location.href='/back/orders'">返回</button>
+    {% endif %}
+    <br><br>
     <table id="BACKORDER_NEW" border="1" style="display:none">
         <tr>
             <th>订单编号</th>
@@ -80,7 +88,7 @@
         </tr>
         {% for order in orders %}
         <tr>
-            <td>
+            <td class="orderID">
                 {{ order.id }}
             </td>
             <td class="state">
@@ -137,7 +145,7 @@
                 {% if order.state == 4 %}
                 <button class="reBtn" onclick="updateOrder({{order.id}}, 3, '撤销')">撤销</button>
                 {% endif %}
-                {% if auth == 1 %}
+                {% if auth == '1' %}
                 <button class="reBtn" onclick="removeOrder({{order.id}})">删除</button>
                 {% endif %}
             </td>
@@ -153,8 +161,6 @@
     var interval = 3000;
     $(document).ready(function() {
         setTimeout('checkUpdate()', interval);
-        if ($.cookie("id"))
-            $("body").prepend('<h3>【历史记录】</h3>' + $.cookie("id") + "<br>");
         var list = $(".orderList").first();
         while(list.length > 0) {
             list.data($.parseJSON(list.text()));
@@ -178,6 +184,15 @@
             // list.text(list.text().replace(/今天/, M+D))
             list = list.parent().next().children(".orderList");
         }
+        {% if auth == '0' %}
+        list = $(".orderID").last();
+        var id = 1;
+        while(list.length > 0) {
+            list.text(id);
+            id += 1;
+            list = list.parent().prev().children('.orderID');
+        }
+        {% endif %}
         $("#BACKORDER").show();
         $("select#stateCurrent").change(function(){
             var t = $(this).children(":selected").text().trim();
@@ -194,6 +209,17 @@
             $.post("{{ url_for('addBeizhu') }}", {id: $(this).attr("id").substring(7), beizhu: $(this).prev().val()}, function() {alert("添加备注成功！")});
         });
     });
+    function viewHistory() {
+        $("body").prepend('<button onclick="deleteHistory()">删除所有记录</button>')
+        if ($.cookie("id"))
+            $("body").prepend('<h3>【历史记录】</h3>' + $.cookie("id") + "<br><br>");
+    }
+    function deleteHistory() {
+        if(confirm("确定删除所有记录？"))
+        {
+            $.cookie('id', null);
+        }
+    }
     function checkUpdate() {
         $.post("{{ url_for('checkUpdate') }}", {time: interval/1000}, function(data) {
             for (var i = data.order.length-1 ; i >= 0; i--) {
@@ -206,23 +232,34 @@
     }
     function updateOrder(id, state, oper) {
         if ($.cookie("id"))
-            $.cookie("id", $.cookie("id")+"<br>订单号："+id+" 操作："+oper);
+            $.cookie("id", $.cookie("id")+"<br>订单号："+id+" 操作："+oper+" 时间："+getFormatDate());
         else
-            $.cookie("id", "订单号："+id+" 操作："+oper);
+            $.cookie("id", "订单号："+id+" 操作："+oper+" 时间："+getFormatDate());
         $.post("{{ url_for('updateOrder') }}", {id: id, state: state}, function() {window.location.href = '';});
     }
     function removeOrder(id) {
         if(confirm("确定删除么？"))
         {
             $.post("{{ url_for('removeOrder') }}", {id: id}, function() {window.location.href = '';});
-            if ($.cookie("id"))
-                $.cookie("id", $.cookie("id")+"<br>订单号："+id+" 操作：删除");
+            if ($.cookie("id")) {
+                $.cookie("id", $.cookie("id")+"<br>订单号："+id+" 操作：删除 时间："+getFormatDate());
+            }
             else
-                $.cookie("id", "订单号："+id+" 操作：删除");
+                $.cookie("id", "订单号："+id+" 操作：删除 时间："+getFormatDate());
         }
         else
         {
         }
+    }
+    function getFormatDate() {
+        var date = new Date();
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds(); 
+        return Y+M+D+h+m+s;
     }
 </script>
 </html>

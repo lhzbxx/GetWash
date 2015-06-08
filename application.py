@@ -107,30 +107,46 @@ def backLogin():
             session['xuexiao'] = "total"
             return redirect(url_for('getBackOrder'))
         if request.form['usernm'] == "SJTU" and request.form['passwd'] == "jiaodawang":
-            session['Admin'] = "2"
+            session['Admin'] = "0"
             session['xuexiao'] = "SJTU"
             return redirect(url_for('getBackOrder'))
         if request.form['usernm'] == "ECNU" and request.form['passwd'] == "huashizhou":
-            session['Admin'] = "2"
+            session['Admin'] = "0"
             session['xuexiao'] = "ECNU"
             return redirect(url_for('getBackOrder'))
         return redirect(url_for('backLogin'))
     else:
         return render_template("back_login.html")
 
-# 订单表。
+# 订单表，一星期之内。
 @app.route('/back/orders')
 def getBackOrder():
     if session.get('Admin'):
         if session['xuexiao'] == "total":
-    		orders = query_db('select * from cart order by ID desc')
+    		orders = query_db('select * from cart where time>? order by ID desc', [int(time.time())-604800])
     		return render_template("back.html", orders = orders, auth=session['Admin'])
         if session['xuexiao'] == "SJTU":
-            orders = query_db('select * from cart where substr(deliver, 0, 7)=? order by ID desc', [u'上海交通大学'])
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? and time>? order by ID desc', [u'上海交通大学', int(time.time())-604800])
             return render_template("back.html", orders = orders, auth=session['Admin'])
         if session['xuexiao'] == "ECNU":
-            orders = query_db('select * from cart where substr(deliver, 0, 7)=? order by ID desc', [u'华东师范大学'])
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? and time>? order by ID desc', [u'华东师范大学', int(time.time())-604800])
             return render_template("back.html", orders = orders, auth=session['Admin'])
+    else:
+        return redirect(url_for('backLogin'))
+
+# 订单表，全部。
+@app.route('/back/orders/all')
+def getBackOrder_ALL():
+    if session.get('Admin'):
+        if session['xuexiao'] == "total":
+            orders = query_db('select * from cart order by ID desc')
+            return render_template("back.html", orders = orders, auth=session['Admin'], all = 1)
+        if session['xuexiao'] == "SJTU":
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? order by ID desc', [u'上海交通大学'])
+            return render_template("back.html", orders = orders, auth=session['Admin'], all = 1)
+        if session['xuexiao'] == "ECNU":
+            orders = query_db('select * from cart where substr(deliver, 0, 7)=? order by ID desc', [u'华东师范大学'])
+            return render_template("back.html", orders = orders, auth=session['Admin'], all = 1)
     else:
         return redirect(url_for('backLogin'))
         
